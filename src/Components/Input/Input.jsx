@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 const Input = ({ placeholder, value, onChange, type, className, required }) => {
-  console.log(required);
   return (
     <InputStyle
       placeholder={placeholder}

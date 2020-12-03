@@ -16,6 +16,7 @@ const Routes = ({ isLoggedIn }) => {
 const RouteWrapper = styled.div`
   max-width: ${(props) => props.theme.maxWidth};
   margin: 0 auto;
+  height: 90vh;
 `;
 
 export default Routes;
