@@ -4,7 +4,7 @@ import styled from "styled-components";
 import LoginForm from "../../Components/Login/LoginForm";
 import SignupForm from "../../Components/SignUp/SignupForm";
 import useInput from "../../Hooks/useInput";
-import { CREATE_ACCOUNT } from "./Queries";
+import { CREATE_ACCOUNT, REQUEST_LOGIN_CODE } from "./Queries";
 import { toast } from "react-toastify";
 
 const AuthPage = () => {
@@ -14,6 +14,7 @@ const AuthPage = () => {
   const nickname = useInput("");
   const bio = useInput("");
   const [createAccountMutation] = useMutation(CREATE_ACCOUNT);
+  const [requestLoginCodeMutation] = useMutation(REQUEST_LOGIN_CODE);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -45,12 +46,27 @@ const AuthPage = () => {
         bio.setValue("");
         setTimeout(() => setAction("login"), 2000);
       }
+    } else if (action === "login") {
+      if (email.value === "") {
+        toast.warning("이메일을 입력해주세요 😉");
+        return;
+      }
+      const {
+        data: { requestLoginCode },
+      } = await requestLoginCodeMutation({
+        variables: {
+          email: email.value,
+        },
+      });
+      console.log(requestLoginCode);
     }
   };
 
   return (
     <>
-      {action === "login" && <LoginForm email={email} setAction={setAction} />}
+      {action === "login" && (
+        <LoginForm email={email} setAction={setAction} onSubmit={onSubmit} />
+      )}
       {action === "signUp" && (
         <SignupForm
           email={email}

@@ -26,7 +26,7 @@ const SignupForm = ({ email, name, nickname, bio, onSubmit, setAction }) => {
         required
       />
       <Select value={bio.value} onChange={bio.onChange}>
-        <option value="" selected disabled hidden>
+        <option value="" disabled hidden>
           성별
         </option>
         <option value="m">Male</option>

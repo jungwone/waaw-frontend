@@ -15,7 +15,7 @@ function App() {
         <Router>
           <Routes />
         </Router>
-        <ToastContainer position="top-left" autoClose="4000" closeOnClick />
+        <ToastContainer position="top-left" closeOnClick />
       </>
     </ThemeProvider>
   );
