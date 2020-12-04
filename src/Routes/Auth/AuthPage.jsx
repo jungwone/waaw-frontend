@@ -3,7 +3,12 @@ import React, { useState } from "react";
 import LoginForm from "../../Components/Login/LoginForm";
 import SignupForm from "../../Components/SignUp/SignupForm";
 import useInput from "../../Hooks/useInput";
-import { CREATE_ACCOUNT, REQUEST_LOGIN_CODE } from "./Queries";
+import {
+  CONFIRM_LOGIN_CODE,
+  CREATE_ACCOUNT,
+  LOCAL_LOGIN,
+  REQUEST_LOGIN_CODE,
+} from "./Queries";
 import { toast } from "react-toastify";
 
 const AuthPage = () => {
@@ -15,6 +20,8 @@ const AuthPage = () => {
   const loginCode = useInput("");
   const [createAccountMutation] = useMutation(CREATE_ACCOUNT);
   const [requestLoginCodeMutation] = useMutation(REQUEST_LOGIN_CODE);
+  const [confirmLoginCodeMutation] = useMutation(CONFIRM_LOGIN_CODE);
+  const [localLoginMutation] = useMutation(LOCAL_LOGIN);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -29,38 +36,68 @@ const AuthPage = () => {
         return;
       }
 
-      const {
-        data: { createAccount },
-      } = await createAccountMutation({
-        variables: {
-          email: email.value,
-          name: name.value,
-          nickname: nickname.value,
-          bio: bio.value,
-        },
-      });
-      if (createAccount) {
-        toast.success("회원가입이 완료되었습니다!! 😘");
-        name.setValue("");
-        email.setValue("");
-        bio.setValue("");
-        setTimeout(() => setAction("login"), 2000);
+      try {
+        const {
+          data: { createAccount },
+        } = await createAccountMutation({
+          variables: {
+            email: email.value,
+            name: name.value,
+            nickname: nickname.value,
+            bio: bio.value,
+          },
+        });
+        if (createAccount) {
+          toast.success("회원가입이 완료되었습니다!! 😘");
+          name.setValue("");
+          email.setValue("");
+          bio.setValue("");
+          setTimeout(() => setAction("login"), 2000);
+        }
+      } catch {
+        toast.error("회원가입에 실패했습니다. 다시 시도해주세요");
       }
     } else if (action === "login") {
       if (email.value === "") {
         toast.warning("이메일을 입력해주세요 😉");
         return;
       }
-      const {
-        data: { requestLoginCode },
-      } = await requestLoginCodeMutation({
-        variables: {
-          email: email.value,
-        },
-      });
-      if (requestLoginCode) {
-        toast.success("메일이 발송되었습니다! 스팸메일함을 체크해주세요 😥");
-        setAction("check");
+      try {
+        const {
+          data: { requestLoginCode },
+        } = await requestLoginCodeMutation({
+          variables: { email: email.value },
+        });
+        if (requestLoginCode) {
+          toast.success("메일이 발송되었습니다! 스팸메일함도 체크해주세요 😎");
+          setAction("check");
+        }
+      } catch {
+        toast.error("해당 이메일로 가입된 계정이 없습니다. 다시 확인해주세요");
+      }
+    } else if (action === "check") {
+      if (email.value === "" || loginCode.value === "") {
+        return;
+      }
+      try {
+        const {
+          data: { confirmLoginCode: token },
+        } = await confirmLoginCodeMutation({
+          variables: {
+            email: email.value,
+            loginCode: loginCode.value,
+          },
+        });
+
+        if (token) {
+          localLoginMutation({
+            variables: { token },
+          });
+        }
+      } catch {
+        toast.error(
+          "메일로 발송된 로그인 코드와 일치하지 않습니다. 다시 확인해주세요"
+        );
       }
     }
   };

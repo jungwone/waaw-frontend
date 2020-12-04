@@ -16,3 +16,15 @@ export const REQUEST_LOGIN_CODE = gql`
     requestLoginCode(email: $email)
   }
 `;
+
+export const CONFIRM_LOGIN_CODE = gql`
+  mutation ConfirmLoginCode($email: String!, $loginCode: String!) {
+    confirmLoginCode(email: $email, loginCode: $loginCode)
+  }
+`;
+
+export const LOCAL_LOGIN = gql`
+  mutation LoginUser($token: String!) {
+    loginUser(token: $token) @client
+  }
+`;
