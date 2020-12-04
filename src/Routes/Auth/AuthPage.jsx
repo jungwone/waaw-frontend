@@ -1,6 +1,5 @@
 import { useMutation } from "@apollo/react-hooks";
 import React, { useState } from "react";
-import styled from "styled-components";
 import LoginForm from "../../Components/Login/LoginForm";
 import SignupForm from "../../Components/SignUp/SignupForm";
 import useInput from "../../Hooks/useInput";
@@ -8,11 +7,12 @@ import { CREATE_ACCOUNT, REQUEST_LOGIN_CODE } from "./Queries";
 import { toast } from "react-toastify";
 
 const AuthPage = () => {
-  const [action, setAction] = useState("signUp");
+  const [action, setAction] = useState("login");
   const email = useInput("");
   const name = useInput("");
   const nickname = useInput("");
   const bio = useInput("");
+  const loginCode = useInput("");
   const [createAccountMutation] = useMutation(CREATE_ACCOUNT);
   const [requestLoginCodeMutation] = useMutation(REQUEST_LOGIN_CODE);
 
@@ -58,14 +58,23 @@ const AuthPage = () => {
           email: email.value,
         },
       });
-      console.log(requestLoginCode);
+      if (requestLoginCode) {
+        toast.success("메일이 발송되었습니다! 스팸메일함을 체크해주세요 😥");
+        setAction("check");
+      }
     }
   };
 
   return (
     <>
-      {action === "login" && (
-        <LoginForm email={email} setAction={setAction} onSubmit={onSubmit} />
+      {(action === "login" || action === "check") && (
+        <LoginForm
+          email={email}
+          action={action}
+          setAction={setAction}
+          loginCode={loginCode}
+          onSubmit={onSubmit}
+        />
       )}
       {action === "signUp" && (
         <SignupForm

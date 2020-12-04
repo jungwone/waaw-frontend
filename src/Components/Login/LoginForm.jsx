@@ -1,11 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { toast } from "react-toastify";
 import { Form, Text, ActionText } from "../SignUp/SignupForm";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
 
-const LoginForm = ({ email, setAction, onSubmit }) => {
+const LoginForm = ({ email, loginCode, action, setAction, onSubmit }) => {
   return (
     <Form onSubmit={onSubmit}>
       <Text>로그인</Text>
@@ -15,6 +14,13 @@ const LoginForm = ({ email, setAction, onSubmit }) => {
         placeholder="이메일"
         required
       />
+      {action === "check" && (
+        <Input
+          placeholder="로그인 코드"
+          value={loginCode.value}
+          onChange={loginCode.onChange}
+        />
+      )}
       <Button text="로그인" />
       <SignUpText onClick={() => setAction("signUp")}>
         <span>
