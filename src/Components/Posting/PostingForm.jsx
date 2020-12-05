@@ -12,11 +12,11 @@ const PostingForm = ({
   category,
   open,
   onChangeOpen,
+  onFileChange,
   onSubmit,
 }) => {
   return (
     <Form onSubmit={onSubmit}>
-      <div style={{ marginBottom: "12px" }}>이미지 클릭</div>
       <Category>
         <Select value={category.value} onChange={category.onChange}>
           <option value="" disabled hidden>
@@ -50,7 +50,7 @@ const PostingForm = ({
           <div className="text">{open ? "공개" : "비공개"}</div>
         </div>
       </OpenCheckBox>
-
+      <input type="file" onChange={onFileChange} accept="image/*" />
       <Button text="작성 완료" />
     </Form>
   );
@@ -117,7 +117,6 @@ const OpenCheckBox = styled.div`
     margin: 0;
     border: 2px solid #474755;
     background-color: white;
-    /* background: linear-gradient(180deg, #2d2f39 0%, #1f2027 100%); */
     transition: all 0.2s ease;
     &:after {
       content: "";
