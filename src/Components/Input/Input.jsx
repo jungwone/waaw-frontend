@@ -10,7 +10,7 @@ const Input = ({ placeholder, value, onChange, type, className, required }) => {
       type={type}
       className={className}
       required={required}
-    ></InputStyle>
+    />
   );
 };
 

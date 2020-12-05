@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import GlobalStyles from "../Styles/GlobalStyles";
 import Theme from "../Styles/Theme";
 import Routes from "./Routes";
+import Header from "./Header/Header";
 
 const APP_QUERY = gql`
   {
@@ -23,6 +24,7 @@ function App() {
       <>
         <GlobalStyles />
         <Router>
+          {isLoggedIn && <Header />}
           <Routes isLoggedIn={isLoggedIn} />
         </Router>
         <ToastContainer position="top-left" closeOnClick autoClose={4000} />

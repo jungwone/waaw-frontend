@@ -5,11 +5,14 @@ export default createGlobalStyle`
     ${reset}
 
     * {
-        box-sizing:border-box;
+        box-sizing: border-box;
     }
 
     body {
-        font-size:14px;        
+        font-size: 14px;
+    }
+    li {
+        list-style: none;
     }
     
 

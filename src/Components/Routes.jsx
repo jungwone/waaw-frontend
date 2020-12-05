@@ -1,22 +1,29 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import AuthPage from "../Routes/Auth/AuthPage";
 import styled from "styled-components";
+import AuthPage from "../Routes/Auth/AuthPage";
+import PostingPage from "../Routes/Posting/PostingPage";
 
 const Routes = ({ isLoggedIn }) => {
   return (
     <RouteWrapper>
       <Switch>
-        <Route path="/">{isLoggedIn ? "Home" : <AuthPage />}</Route>
+        <Route exact path="/">
+          {isLoggedIn ? "Home" : <AuthPage />}
+        </Route>
+        <Route exact path="/posting">
+          <PostingPage />
+        </Route>
       </Switch>
     </RouteWrapper>
   );
 };
 
 const RouteWrapper = styled.div`
-  max-width: ${(props) => props.theme.maxWidth};
-  margin: 0 auto;
   height: 90vh;
+  padding: 0 30px;
+  position: relative;
+  top: ${(props) => props.theme.headerHeight};
 `;
 
 export default Routes;

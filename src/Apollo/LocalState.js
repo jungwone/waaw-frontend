@@ -1,3 +1,5 @@
+import { gql } from "apollo-boost";
+
 export const defaults = {
   isLoggedIn: Boolean(localStorage.getItem("waawToken") || false),
 };
@@ -20,3 +22,14 @@ export const resolvers = {
     },
   },
 };
+
+export const typeDefs = gql`
+  enum Category {
+    POEM
+    NOVEL
+    REVIEW
+    FREE
+    ESSAY
+    RELATIONSHIP
+  }
+`;

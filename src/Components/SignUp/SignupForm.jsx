@@ -61,7 +61,7 @@ export const Form = styled.form`
   }
 `;
 
-const Select = styled.select`
+export const Select = styled.select`
   width: 100%;
   border-radius: 5px;
   height: 35px;
