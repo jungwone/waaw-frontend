@@ -14,6 +14,12 @@ const Routes = ({ isLoggedIn }) => {
         <Route exact path="/posting">
           <PostingPage />
         </Route>
+        <Route exact path="/profile">
+          <img
+            src="https://waaw-photo-bucket.s3.ap-northeast-2.amazonaws.com/1607325740978-image-.wqsmew0v73e.png"
+            alt="test"
+          />
+        </Route>
       </Switch>
     </RouteWrapper>
   );

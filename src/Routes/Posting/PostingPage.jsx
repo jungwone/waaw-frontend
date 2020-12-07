@@ -33,7 +33,6 @@ const PostingPage = () => {
       } = finishedEvent;
       fileUrl.setValue(result);
     };
-    setFile(myFile);
   };
 
   const onChangeOpen = () => {
@@ -42,20 +41,23 @@ const PostingPage = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
+    let fileURL = "";
     const formData = new FormData();
     formData.append("file", file);
-    const response = await axios.post(
-      "http://localhost:4000/api/upload",
-      formData,
-      {
+    try {
+      const {
+        data: { location },
+      } = await axios.post("http://localhost:4000/api/upload", formData, {
         headers: {
           "content-type": "multipart/form-data",
         },
-      }
-    );
-    console.log(response);
-    return;
+        if(location) {
+          fileURL = location;
+        },
+      });
+    } catch {
+      toast.error("업로드 요청에 실패했습니다.");
+    }
 
     if (title.value === "" || content.value === "" || category.value === "") {
       toast.warning("입력하지 않은 항목이 있습니다. 다시 확인해주세요 :)");
@@ -89,6 +91,7 @@ const PostingPage = () => {
         category={category}
         open={open}
         onChangeOpen={onChangeOpen}
+        fileUrl={fileUrl}
         onFileChange={onFileChange}
         onSubmit={onSubmit}
       />

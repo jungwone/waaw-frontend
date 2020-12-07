@@ -4,6 +4,7 @@ import TextareaAutoSize from "react-textarea-autosize";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
 import { Select } from "../SignUp/SignupForm";
+import ImageUploadInput from "./ImageUploadInput";
 
 const PostingForm = ({
   id,
@@ -13,10 +14,13 @@ const PostingForm = ({
   open,
   onChangeOpen,
   onFileChange,
+  fileUrl,
   onSubmit,
 }) => {
   return (
     <Form onSubmit={onSubmit}>
+      {/* <input type="file" onChange={onFileChange} accept="image/*" /> */}
+      <ImageUploadInput fileUrl={fileUrl} onChange={onFileChange} />
       <Category>
         <Select value={category.value} onChange={category.onChange}>
           <option value="" disabled hidden>
@@ -50,7 +54,7 @@ const PostingForm = ({
           <div className="text">{open ? "공개" : "비공개"}</div>
         </div>
       </OpenCheckBox>
-      <input type="file" onChange={onFileChange} accept="image/*" />
+
       <Button text="작성 완료" />
     </Form>
   );
