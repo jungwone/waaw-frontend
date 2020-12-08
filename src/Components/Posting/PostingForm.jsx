@@ -19,7 +19,6 @@ const PostingForm = ({
 }) => {
   return (
     <Form onSubmit={onSubmit}>
-      {/* <input type="file" onChange={onFileChange} accept="image/*" /> */}
       <ImageUploadInput fileUrl={fileUrl} onChange={onFileChange} />
       <Category>
         <Select value={category.value} onChange={category.onChange}>

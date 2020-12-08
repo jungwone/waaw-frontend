@@ -24,6 +24,7 @@ const PostingPage = () => {
     }
 
     let myFile = e.target.files[0];
+    setFile(myFile);
     const reader = new FileReader();
     reader.readAsDataURL(myFile);
 
@@ -41,7 +42,7 @@ const PostingPage = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    let fileURL = "";
+
     const formData = new FormData();
     formData.append("file", file);
     try {
@@ -51,12 +52,13 @@ const PostingPage = () => {
         headers: {
           "content-type": "multipart/form-data",
         },
-        if(location) {
-          fileURL = location;
-        },
       });
+      if (location) {
+        fileUrl.setValue(location);
+      }
     } catch {
       toast.error("업로드 요청에 실패했습니다.");
+      return;
     }
 
     if (title.value === "" || content.value === "" || category.value === "") {
@@ -72,6 +74,7 @@ const PostingPage = () => {
           content: content.value,
           category: category.value,
           open,
+          fileUrl: fileUrl.value,
         },
       });
       if (upsertPost) {

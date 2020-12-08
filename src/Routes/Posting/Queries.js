@@ -7,6 +7,7 @@ export const UPSERT_POST = gql`
     $content: String!
     $category: Category!
     $open: Boolean!
+    $fileUrl: String
   ) {
     upsertPost(
       id: $id
@@ -14,12 +15,14 @@ export const UPSERT_POST = gql`
       content: $content
       category: $category
       open: $open
+      fileUrl: $fileUrl
     ) {
       id
       title
       content
       category
       open
+      fileUrl
     }
   }
 `;

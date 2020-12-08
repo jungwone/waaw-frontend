@@ -8,6 +8,7 @@ const ImageUploadInput = ({ fileUrl, onChange }) => {
     e.preventDefault();
     inputRef.current.click();
   };
+
   return (
     <Wrapper>
       <div className="container">
@@ -20,7 +21,12 @@ const ImageUploadInput = ({ fileUrl, onChange }) => {
           <div className="content">
             <div className="text">No file chosen, yet!</div>
           </div>
-          <div className="cancel-btn">
+          <div
+            className="cancel-btn"
+            onClick={() => {
+              fileUrl.setValue("");
+            }}
+          >
             <Cancel />
           </div>
         </div>
