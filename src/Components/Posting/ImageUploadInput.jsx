@@ -13,11 +13,8 @@ const ImageUploadInput = ({ fileUrl, onChange }) => {
     <Wrapper>
       <div className="container">
         <div className={`wrapper ${fileUrl.value && "active"}`}>
-          <div className="image">
-            {fileUrl.value !== "" && (
-              <img src={`${fileUrl.value}`} alt="post" />
-            )}
-          </div>
+          {fileUrl.value !== "" && <Image src={fileUrl.value}></Image>}
+
           <div className="content">
             <div className="text">No file chosen, yet!</div>
           </div>
@@ -30,7 +27,7 @@ const ImageUploadInput = ({ fileUrl, onChange }) => {
             <Cancel />
           </div>
         </div>
-        <button onClick={onClick} id="custom-btn">
+        <button onClick={onClick} className="custom-btn">
           이미지 업로드
         </button>
         <input
@@ -48,14 +45,12 @@ const ImageUploadInput = ({ fileUrl, onChange }) => {
 
 const Wrapper = styled.div`
   .container {
-    /* max-height: 30vw;
-    max-width: 650px; */
     position: relative;
   }
   .wrapper {
     position: relative;
     height: 37vw;
-    max-height: 280px;
+    max-height: 300px;
     width: 100%;
     border-radius: 10px;
     background: #fff;
@@ -65,25 +60,12 @@ const Wrapper = styled.div`
     justify-content: center;
     overflow: hidden;
     margin-bottom: 15px;
-  }
-  .wrapper.active {
-    border: none;
-  }
-  .wrapper .image {
-    position: absolute;
-    /* height: auto;
-    width: 100%; */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .wrapper img {
-    height: 100%;
-    width: 100%;
-    /* object-fit: fill; */
+    &.active {
+      border: none;
+    }
   }
 
-  .wrapper .text {
+  .text {
     font-size: 20px;
     font-weight: 500;
     color: #5b5b7b;
@@ -100,12 +82,14 @@ const Wrapper = styled.div`
   }
   .wrapper.active:hover .cancel-btn {
     display: block;
-  }
-  .wrapper #cancel-btn i:hover {
-    color: #e74c3c;
+    &:hover {
+      svg {
+        fill: red;
+      }
+    }
   }
 
-  .container #custom-btn {
+  .custom-btn {
     display: block;
     width: 100%;
     height: 35px;
@@ -122,5 +106,13 @@ const Wrapper = styled.div`
     margin-bottom: 20px;
   }
 `;
-
+const Image = styled.div`
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-size: contain;
+  background-image: url(${(props) => props.src});
+  background-repeat: no-repeat;
+  background-position: center;
+`;
 export default ImageUploadInput;

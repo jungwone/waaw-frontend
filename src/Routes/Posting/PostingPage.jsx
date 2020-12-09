@@ -42,19 +42,20 @@ const PostingPage = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    let s3FileKey = "";
 
     const formData = new FormData();
     formData.append("file", file);
     try {
       const {
-        data: { location },
+        data: { key },
       } = await axios.post("http://localhost:4000/api/upload", formData, {
         headers: {
           "content-type": "multipart/form-data",
         },
       });
-      if (location) {
-        fileUrl.setValue(location);
+      if (key) {
+        s3FileKey = key;
       }
     } catch {
       toast.error("업로드 요청에 실패했습니다.");
@@ -74,7 +75,7 @@ const PostingPage = () => {
           content: content.value,
           category: category.value,
           open,
-          fileUrl: fileUrl.value,
+          fileUrl: s3FileKey,
         },
       });
       if (upsertPost) {

@@ -60,11 +60,11 @@ const PostingForm = ({
 };
 
 const Form = styled.form`
-  max-width: 650px;
+  max-width: 500px;
   margin: auto;
   position: relative;
   top: 20px;
-  padding-bottom: 20px;
+  padding: 6vw 0 10vw 0;
 `;
 
 const Category = styled.div`

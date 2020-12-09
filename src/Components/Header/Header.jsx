@@ -5,7 +5,9 @@ import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <HeaderStyle>
-      <div>WAAW</div>
+      <div>
+        <Link to="/">WAAW</Link>
+      </div>
 
       <ul>
         <li>
