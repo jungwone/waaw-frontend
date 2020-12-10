@@ -65,6 +65,7 @@ const Form = styled.form`
   position: relative;
   top: 20px;
   padding: 6vw 0 10vw 0;
+  font-family: "Nanum Gothic";
 `;
 
 const Category = styled.div`
@@ -72,6 +73,7 @@ const Category = styled.div`
 `;
 
 const Title = styled(Input)`
+  font-family: inherit;
   &:focus {
     outline: none;
   }
@@ -85,6 +87,8 @@ const TextArea = styled(TextareaAutoSize)`
   margin-bottom: 1rem;
   border-radius: 4px;
   line-height: 1.5;
+  font-family: inherit;
+  letter-spacing: 1.5px;
   &:focus {
     outline: none;
   }

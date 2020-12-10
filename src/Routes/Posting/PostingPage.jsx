@@ -20,6 +20,7 @@ const PostingPage = () => {
 
   const onFileChange = (e) => {
     if (e.target.files.length === 0) {
+      setFile(null);
       return;
     }
 
@@ -44,22 +45,24 @@ const PostingPage = () => {
     e.preventDefault();
     let s3FileKey = "";
 
-    const formData = new FormData();
-    formData.append("file", file);
-    try {
-      const {
-        data: { key },
-      } = await axios.post("http://localhost:4000/api/upload", formData, {
-        headers: {
-          "content-type": "multipart/form-data",
-        },
-      });
-      if (key) {
-        s3FileKey = key;
+    if (file) {
+      const formData = new FormData();
+      formData.append("file", file);
+      try {
+        const {
+          data: { key },
+        } = await axios.post("http://localhost:4000/api/upload", formData, {
+          headers: {
+            "content-type": "multipart/form-data",
+          },
+        });
+        if (key) {
+          s3FileKey = key;
+        }
+      } catch {
+        toast.error("업로드 요청에 실패했습니다.");
+        return;
       }
-    } catch {
-      toast.error("업로드 요청에 실패했습니다.");
-      return;
     }
 
     if (title.value === "" || content.value === "" || category.value === "") {

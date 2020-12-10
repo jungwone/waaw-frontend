@@ -46,6 +46,7 @@ const ImageUploadInput = ({ fileUrl, onChange }) => {
 const Wrapper = styled.div`
   .container {
     position: relative;
+    font-family: inherit;
   }
   .wrapper {
     position: relative;
@@ -99,6 +100,7 @@ const Wrapper = styled.div`
     color: #fff;
     font-size: 15px;
     font-weight: bold;
+    font-family: inherit;
     letter-spacing: 1px;
     text-transform: uppercase;
     cursor: pointer;

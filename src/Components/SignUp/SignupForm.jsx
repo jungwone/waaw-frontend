@@ -67,6 +67,7 @@ export const Select = styled.select`
   height: 35px;
   padding: 0 15px;
   font-size: 14px;
+  font-family: inherit;
 `;
 
 export const Text = styled.span`

@@ -14,6 +14,8 @@ const ButtonStyle = styled.button`
   background-color: #6cd47f;
   text-align: center;
   padding: 7px 0px;
+  text-decoration: none;
+  font-family: inherit;
   font-size: 14px;
   cursor: pointer;
 `;
