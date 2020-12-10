@@ -20,7 +20,9 @@ const PostCard = ({ id, title, category, fileUrl }) => {
 const Wrapper = styled.li`
   cursor: pointer;
   width: 100%;
+  min-width: 100px;
   height: 320px;
+  min-height: 145px;
   padding: 10px;
   font-size: 16px;
   margin-bottom: 10px;

@@ -32,13 +32,15 @@ const Wrapper = styled.div`
   align-items: center;
   padding-bottom: 30px;
   width: 100%;
+  min-width: 360px;
+  max-width: 1200px;
+  margin: auto;
 `;
 
 const NoPostText = styled.div``;
 
 const PostListWrapper = styled.ul`
   width: 100%;
-  max-width: 1200px;
   display: grid;
   gap: 30px;
   grid-template-columns: repeat(4, 22%);
