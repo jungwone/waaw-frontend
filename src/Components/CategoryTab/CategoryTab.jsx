@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
 const categories = [
@@ -11,13 +11,15 @@ const categories = [
   { id: "RELATIONSHIP", name: "연애" },
 ];
 
-const CategoryTab = ({ selected = "" }) => {
-  const [tab, setTab] = useState(selected !== "" ? selected : "ALL");
+const CategoryTab = ({ selectedCategory, onClickCategory }) => {
   return (
     <Wrapper>
       {categories.map((category) => (
         <CategoryStyle
-          className={`${tab === category.id && "active"}`}
+          onClick={() => {
+            onClickCategory(category.id);
+          }}
+          className={`${selectedCategory === category.id && "active"}`}
           key={category.id}
         >
           {category.name}
@@ -30,8 +32,7 @@ const CategoryTab = ({ selected = "" }) => {
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-around;
-
-  max-width: 1200px;
+  max-width: 600px;
   margin: auto;
 `;
 const CategoryStyle = styled.div`
