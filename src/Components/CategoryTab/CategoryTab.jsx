@@ -11,15 +11,15 @@ const categories = [
   { id: "RELATIONSHIP", name: "연애" },
 ];
 
-const CategoryTab = ({ selectedCategory, onClickCategory }) => {
+const CategoryTab = ({ selectedCategory }) => {
   return (
     <Wrapper>
       {categories.map((category) => (
         <CategoryStyle
           onClick={() => {
-            onClickCategory(category.id);
+            selectedCategory.setValue(category.id);
           }}
-          className={`${selectedCategory === category.id && "active"}`}
+          className={`${selectedCategory.value === category.id && "active"}`}
           key={category.id}
         >
           {category.name}
