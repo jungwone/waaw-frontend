@@ -16,7 +16,9 @@ const ImageUploadInput = ({ fileUrl, onChange }) => {
           {fileUrl.value !== "" && <Image src={fileUrl.value}></Image>}
 
           <div className="content">
-            <div className="text">No file chosen, yet!</div>
+            {fileUrl.value === "" && (
+              <div className="text">No file chosen, yet!</div>
+            )}
           </div>
           <div
             className="cancel-btn"

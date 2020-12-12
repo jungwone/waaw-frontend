@@ -22,7 +22,7 @@ const Routes = ({ isLoggedIn }) => {
 };
 
 const RouteWrapper = styled.div`
-  height: 90vh;
+  height: 100vh;
   padding: 30px;
   position: relative;
   top: ${(props) => props.theme.headerHeight};

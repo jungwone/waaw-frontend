@@ -57,7 +57,7 @@ const Image = styled.div`
   background-image: url(${(props) => props.src});
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover;
+  background-size: contain;
   margin-bottom: 2px;
   @media (max-width: 768px) {
     height: 70%;
