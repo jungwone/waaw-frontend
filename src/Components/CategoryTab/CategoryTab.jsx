@@ -11,13 +11,14 @@ const categories = [
   { id: "RELATIONSHIP", name: "연애" },
 ];
 
-const CategoryTab = ({ selectedCategory }) => {
+const CategoryTab = ({ selectedCategory, setSkip }) => {
   return (
     <Wrapper>
       {categories.map((category) => (
         <CategoryStyle
           onClick={() => {
             selectedCategory.setValue(category.id);
+            setSkip(0);
           }}
           className={`${selectedCategory.value === category.id && "active"}`}
           key={category.id}
@@ -33,7 +34,10 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-around;
   max-width: 600px;
-  margin: auto;
+  margin: 40px auto 60px auto;
+  @media (max-width: 800px) {
+    margin: 40px auto;
+  }
 `;
 const CategoryStyle = styled.div`
   cursor: pointer;

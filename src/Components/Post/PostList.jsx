@@ -32,7 +32,7 @@ const Wrapper = styled.div`
   align-items: center;
   padding-bottom: 30px;
   width: 100%;
-  min-width: 360px;
+
   max-width: 1200px;
   margin: auto;
 `;
