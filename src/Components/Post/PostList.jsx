@@ -9,7 +9,7 @@ const PostList = ({ posts = [], loading }) => {
       {posts.length === 0 && (
         <NoPostText>"아직 포스트가 없습니다 😥"</NoPostText>
       )}
-      {!loading && posts.length >= 1 && (
+      {!loading && (
         <PostListWrapper>
           {posts.map((post) => (
             <PostCard

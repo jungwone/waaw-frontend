@@ -1,16 +1,14 @@
 import React, { useEffect, useCallback } from "react";
 
-const InfiniteScroll = ({ fetchMore, hasMore }) => {
-  console.log("hasMore : ", hasMore);
+const InfiniteScroll = ({ fetchMoreData, hasMore }) => {
   const handleScroll = useCallback(() => {
     let scrollHeight = document.documentElement.scrollHeight;
     let scrollTop = document.documentElement.scrollTop;
     let clientHeight = document.documentElement.clientHeight;
     if (scrollTop + clientHeight >= scrollHeight && hasMore) {
-      console.log("yeay!");
-      fetchMore();
+      fetchMoreData();
     }
-  }, [hasMore, fetchMore]);
+  }, [hasMore, fetchMoreData]);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);

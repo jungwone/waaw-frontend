@@ -19,33 +19,29 @@ const HomePage = () => {
         : { skip, take, category: category.value },
   });
 
-  const getMorePosts = () => {
-    let startIdex = skip + take;
-    setSkip(skip + take);
-
+  const fetchMoreData = () => {
+    let startIndex = data?.findManyPostsWithCategory.length
+      ? data.findManyPostsWithCategory.length
+      : take;
     fetchMore({
       variables:
         category.value === "ALL"
-          ? { skip: startIdex, take }
-          : { skip: startIdex, take, category: category.value },
-      updateQuery: (previousResult, { fetchMoreResult }) => {
+          ? { skip: startIndex, take }
+          : { skip: startIndex, take, category: category.value },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        console.log(prev);
+        console.log(fetchMoreResult);
         if (!fetchMoreResult) {
-          return previousResult;
+          return prev;
         } else {
-          const prevPosts = data.findManyPostsWithCategory;
-          const newPosts = fetchMoreResult.findManyPostsWithCategory;
-
-          fetchMoreResult.findManyPostsWithCategory = [
-            ...prevPosts,
-            ...newPosts,
-          ];
-
-          if (newPosts.length < take) {
+          if (fetchMoreResult.findManyPostsWithCategory.length < take) {
             setHasMore(false);
           }
-          console.log(fetchMoreResult);
-
-          return { ...fetchMoreResult };
+          fetchMoreResult.findManyPostsWithCategory = [
+            ...prev.findManyPostsWithCategory,
+            ...fetchMoreResult.findManyPostsWithCategory,
+          ];
+          return fetchMoreResult;
         }
       },
     });
@@ -53,12 +49,38 @@ const HomePage = () => {
 
   return (
     <>
-      <InfiniteScroll fetchMore={getMorePosts} hasMore={hasMore} />
+      <InfiniteScroll fetchMoreData={fetchMoreData} hasMore={hasMore} />
       <CategoryTab selectedCategory={category} setSkip={setSkip} />
       {!loading && data && (
         <PostList posts={data.findManyPostsWithCategory} loading={loading} />
       )}
-      <button onClick={getMorePosts}>더 불러오기</button>
+      <button
+        onClick={() => {
+          fetchMore({
+            variables:
+              category.value === "ALL"
+                ? { skip: data.findManyPostsWithCategory.length, take }
+                : { skip, take, category: category.value },
+            updateQuery: (prev, { fetchMoreResult }) => {
+              console.log(prev);
+              console.log(fetchMoreResult);
+              if (!fetchMoreResult) {
+                console.log("no");
+                setHasMore(false);
+                return prev;
+              } else {
+                fetchMoreResult.findManyPostsWithCategory = [
+                  ...prev.findManyPostsWithCategory,
+                  ...fetchMoreResult.findManyPostsWithCategory,
+                ];
+                return fetchMoreResult;
+              }
+            },
+          });
+        }}
+      >
+        더 불러오기
+      </button>
     </>
   );
 };
