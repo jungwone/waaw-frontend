@@ -1,27 +1,32 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { ProfileIcon, WritingIcon } from "../Icons/Icons";
 
 const Header = () => {
   return (
     <HeaderStyle>
-      <div>
-        <Link to="/">WAAW</Link>
-      </div>
+      <Logo>
+        <LogoText to="/">글의 집</LogoText>
+      </Logo>
 
       <ul>
         <li>
-          <Link to="/posting">글쓰기</Link>
+          <Link to="/posting">
+            <WritingIcon />
+          </Link>
         </li>
         <li>
-          <Link to="/profile">프로필</Link>
+          <Link to="/profile">
+            <ProfileIcon />
+          </Link>
         </li>
       </ul>
     </HeaderStyle>
   );
 };
 
-export const HeaderStyle = styled.nav`
+const HeaderStyle = styled.nav`
   height: ${(props) => props.theme.headerHeight};
   border: 1px solid gray;
   background-color: white;
@@ -29,12 +34,30 @@ export const HeaderStyle = styled.nav`
   position: fixed;
   z-index: 3;
   display: flex;
+  align-items: center;
+  padding: 0 30px;
   ul {
     margin-left: auto;
   }
   li {
     float: left;
-    margin-right: 20px;
+    margin-left: 25px;
+  }
+`;
+const Logo = styled.div`
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px;
+`;
+
+const LogoText = styled(Link)`
+  text-decoration: none;
+  font-family: "Single Day";
+  font-size: 40px;
+  color: #000;
+  @media (max-width: 568px) {
+    font-size: 25px;
   }
 `;
 

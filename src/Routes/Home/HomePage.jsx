@@ -54,33 +54,6 @@ const HomePage = () => {
       {!loading && data && (
         <PostList posts={data.findManyPostsWithCategory} loading={loading} />
       )}
-      <button
-        onClick={() => {
-          fetchMore({
-            variables:
-              category.value === "ALL"
-                ? { skip: data.findManyPostsWithCategory.length, take }
-                : { skip, take, category: category.value },
-            updateQuery: (prev, { fetchMoreResult }) => {
-              console.log(prev);
-              console.log(fetchMoreResult);
-              if (!fetchMoreResult) {
-                console.log("no");
-                setHasMore(false);
-                return prev;
-              } else {
-                fetchMoreResult.findManyPostsWithCategory = [
-                  ...prev.findManyPostsWithCategory,
-                  ...fetchMoreResult.findManyPostsWithCategory,
-                ];
-                return fetchMoreResult;
-              }
-            },
-          });
-        }}
-      >
-        더 불러오기
-      </button>
     </>
   );
 };

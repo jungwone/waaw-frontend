@@ -44,10 +44,12 @@ const CategoryStyle = styled.div`
   padding: 10px 15px;
   border: 2px solid #f7f7f7;
   border-radius: 20px;
-  &.active {
+  &.active,
+  &:hover {
     border-color: skyblue;
     color: skyblue;
     font-weight: bold;
+    transition: 0.25s ease;
   }
   @media (max-width: 568px) {
     font-size: 12px;

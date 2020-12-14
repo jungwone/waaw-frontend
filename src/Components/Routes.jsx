@@ -24,6 +24,7 @@ const Routes = ({ isLoggedIn }) => {
 const RouteWrapper = styled.div`
   height: 100vh;
   padding: 30px;
+  padding-top: 70px;
   position: relative;
   top: ${(props) => props.theme.headerHeight};
   font-family: "Nanum Gothic", sans-serif;

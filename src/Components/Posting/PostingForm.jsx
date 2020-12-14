@@ -64,7 +64,7 @@ const Form = styled.form`
   margin: auto;
   position: relative;
   top: 20px;
-  padding: 6vw 0 10vw 0;
+  padding-bottom: 8vw;
   font-family: "Nanum Gothic";
 `;
 
