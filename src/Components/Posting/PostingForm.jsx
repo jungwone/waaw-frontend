@@ -65,30 +65,36 @@ const Form = styled.form`
   position: relative;
   top: 20px;
   padding-bottom: 8vw;
-  font-family: "Nanum Gothic";
 `;
 
 const Category = styled.div`
   margin-bottom: 1rem;
+  font-size: 30px;
 `;
 
 const Title = styled(Input)`
-  font-family: inherit;
+  font-family: "SDMiSaeng";
+  font-size: 30px;
   &:focus {
     outline: none;
   }
   margin-bottom: 21px;
+  @media (max-width: 568px) {
+    font-size: 23px;
+  }
 `;
 
 const TextArea = styled(TextareaAutoSize)`
+  font-family: "SDMiSaeng" !important;
+  font-size: 26px;
   width: 100%;
   resize: none;
   padding: 15px;
   margin-bottom: 1rem;
   border-radius: 4px;
-  line-height: 1.5;
+  line-height: 1.2;
   font-family: inherit;
-  letter-spacing: 1.5px;
+
   &:focus {
     outline: none;
   }
