@@ -13,9 +13,14 @@ const PostList = ({ posts = [], loading }) => {
         <PostListWrapper>
           {posts.map((post) => (
             <PostCard
-              key={post.id}
+              key={post.uuid}
               id={post.id}
-              title={post.title}
+              uuid={post.uuid}
+              title={`${
+                post.title.length > 12
+                  ? post.title.substring(0, 12) + "..."
+                  : post.title
+              }`}
               category={post.category}
               fileUrl={post.fileUrl}
             />
@@ -49,6 +54,11 @@ const PostListWrapper = styled.ul`
 
   @media (max-width: 1280px) {
     grid-template-columns: repeat(3, 30%);
+    gap: 15px;
+  }
+
+  @media (max-width: 568px) {
+    grid-template-columns: repeat(2, 45%);
     gap: 15px;
   }
 `;

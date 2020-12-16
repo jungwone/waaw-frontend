@@ -8,6 +8,7 @@ export const HOME_POST_QUERY = gql`
   ) {
     findManyPostsWithCategory(category: $category, skip: $skip, take: $take) {
       id
+      uuid
       title
       content
       category

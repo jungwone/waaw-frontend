@@ -4,6 +4,7 @@ import styled from "styled-components";
 import AuthPage from "../Routes/Auth/AuthPage";
 import HomePage from "../Routes/Home/HomePage";
 import PostingPage from "../Routes/Posting/PostingPage";
+import PostPage from "../Routes/Post/PostPage";
 
 const Routes = ({ isLoggedIn }) => {
   return (
@@ -14,6 +15,9 @@ const Routes = ({ isLoggedIn }) => {
         </Route>
         <Route exact path="/posting">
           <PostingPage />
+        </Route>
+        <Route exact path="/post/:uuid">
+          <PostPage />
         </Route>
         <Route exact path="/profile"></Route>
       </Switch>
@@ -27,7 +31,7 @@ const RouteWrapper = styled.div`
   padding-top: 70px;
   position: relative;
   top: ${(props) => props.theme.headerHeight};
-  font-family: "Nanum Gothic", sans-serif;
+
   @media (max-width: 768px) {
     padding: 15px 10px;
   }
