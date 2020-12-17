@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { HOME_POST_QUERY } from "./Queries";
 import PostList from "../../Components/Post/PostList";
@@ -10,6 +10,14 @@ const HomePage = () => {
   const [skip, setSkip] = useState(0);
   const [hasMore, setHasMore] = useState(true);
   const category = useInput("ALL");
+
+  useEffect(() => {
+    return () => {
+      setSkip(0);
+      setHasMore(true);
+      category.setValue("ALL");
+    };
+  }, [skip, hasMore, category]);
 
   const { data, loading, fetchMore } = useQuery(HOME_POST_QUERY, {
     variables:
