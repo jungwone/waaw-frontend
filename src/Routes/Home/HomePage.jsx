@@ -5,10 +5,9 @@ import PostList from "../../Components/Post/PostList";
 import CategoryTab from "../../Components/CategoryTab/CategoryTab";
 import useInput from "../../Hooks/useInput";
 import InfiniteScroll from "../../Components/InfiniteScroll/InfiniteScroll";
-
+let take = 10;
 const HomePage = () => {
   const [skip, setSkip] = useState(0);
-  const [take, setTake] = useState(10);
   const [hasMore, setHasMore] = useState(true);
   const category = useInput("ALL");
 
@@ -29,8 +28,6 @@ const HomePage = () => {
           ? { skip: startIndex, take }
           : { skip: startIndex, take, category: category.value },
       updateQuery: (prev, { fetchMoreResult }) => {
-        console.log(prev);
-        console.log(fetchMoreResult);
         if (!fetchMoreResult) {
           return prev;
         } else {

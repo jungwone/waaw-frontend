@@ -11,7 +11,9 @@ const PostCard = ({ id, uuid, title, category, fileUrl }) => {
             src={`https://waaw-photo-bucket.s3.ap-northeast-2.amazonaws.com/photos/${fileUrl}`}
           ></Image>
         ) : (
-          <Image>{title}</Image>
+          <Image className="title">
+            <ImageText>{title}</ImageText>
+          </Image>
         )}
 
         <Title>{title}</Title>
@@ -30,7 +32,7 @@ const Wrapper = styled.li`
   font-size: 26px;
   margin-bottom: 10px;
   border: 1px solid #fafafa;
-  overflow: hidden;
+
   &:hover {
     transition: 0.5s;
     transform: scale(1.05);
@@ -70,6 +72,18 @@ const Image = styled.div`
   @media (max-width: 768px) {
     height: 68%;
   }
+
+  &.title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f7f7f7;
+    padding: 10px;
+  }
+`;
+
+const ImageText = styled.span`
+  word-break: break-all;
 `;
 
 const Title = styled.div`

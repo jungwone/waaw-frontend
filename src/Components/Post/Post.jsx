@@ -4,54 +4,84 @@ import moment from "moment";
 import "moment/locale/ko";
 import { s3url } from "../../config";
 import UserImage from "../UserImage/UserImage";
+import { CommentIcon, EmptyHeart, FullHeart } from "../Icons/Icons";
 
-const Post = ({ loading, data }) => {
-  const post = data?.findOnePost;
-
+const Post = ({ post, toggleLike }) => {
   return (
     <>
-      {!loading
-        ? data && (
-            <Wrapper>
-              <Title>{post.title}</Title>
-              <ImageWrapper>
-                <Image src={`${s3url}/photos/${post.fileUrl}`} alt="hey" />
-              </ImageWrapper>
+      <Wrapper>
+        <PostContentBox>
+          <Title>{post.title}</Title>
+          {post.fileUrl && (
+            <ImageWrapper>
+              <Image src={`${s3url}/photos/${post.fileUrl}`} alt="hey" />
+            </ImageWrapper>
+          )}
 
-              <Content>{post.content}</Content>
-              <DateText>
-                {moment(Number(post.createdAt)).format("YYYY. MM. DD. H : mm")}
-              </DateText>
-              <UserBox>
-                <UserImage
-                  src={
-                    post.author.avatar
-                      ? `${s3url}/user/${post.author.avatar}`
-                      : `${s3url}/smiley.png`
-                  }
-                  alt="avatar"
-                />
+          <Content>{post.content}</Content>
+          <DateText>
+            {moment(Number(post.createdAt)).format("YYYY. MM. DD. H : mm")}
+          </DateText>
+        </PostContentBox>
+        <UserInfoBox>
+          <UserImage
+            src={
+              post.author.avatar
+                ? `${s3url}/user/${post.author.avatar}`
+                : `${s3url}/smiley.png`
+            }
+            alt="avatar"
+          />
 
-                <DetailBox>
-                  <div>{post.author.nickname}</div>
-                  <div>글 86개</div>
-                </DetailBox>
-              </UserBox>
-            </Wrapper>
-          )
-        : "Loading . . ."}
+          <Detail>
+            <div>{post.author.nickname}</div>
+            <div>글 86개</div>
+          </Detail>
+        </UserInfoBox>
+        <Buttons>
+          {post.isLiked === true ? (
+            <Button onClick={toggleLike} className="heart">
+              <FullHeart />
+            </Button>
+          ) : (
+            <Button onClick={toggleLike} className="heart">
+              <EmptyHeart />
+            </Button>
+          )}
+          <CountText>{post.likeCount}</CountText>
+          <Button>
+            <CommentIcon />
+          </Button>
+          <CountText>16</CountText>
+        </Buttons>
+      </Wrapper>
     </>
   );
 };
 
-const UserBox = styled.div`
-  border: 1px solid #f0f0f0;
-  display: flex;
-  padding: 15px;
+const Buttons = styled.div`
+  transition: 0.4s ease;
 `;
 
-const DetailBox = styled.div`
-  padding-left: 20px;
+const Button = styled.button`
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background-color: #fff;
+  &.heart {
+    svg {
+      fill: #f72048;
+    }
+  }
+`;
+
+const CountText = styled.span`
+  cursor: pointer;
+  padding-left: 10px;
+  padding-right: 15px;
+  &:hover {
+    color: skyblue;
+  }
 `;
 
 const Wrapper = styled.div`
@@ -61,6 +91,10 @@ const Wrapper = styled.div`
   padding-top: 20px;
   padding-bottom: 30px;
   font-size: 26px;
+`;
+
+const PostContentBox = styled.section`
+  margin-bottom: 25px;
 `;
 
 const ImageWrapper = styled.div`
@@ -95,7 +129,18 @@ const Content = styled.pre`
 const DateText = styled.div`
   text-align: right;
   color: #888888;
+`;
+
+const UserInfoBox = styled.section`
+  border-top: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  padding: 15px;
   margin-bottom: 25px;
+`;
+
+const Detail = styled.div`
+  padding-left: 20px;
 `;
 
 export default Post;

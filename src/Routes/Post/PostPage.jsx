@@ -1,24 +1,8 @@
 import React from "react";
-import { useQuery } from "@apollo/react-hooks";
-import { gql } from "apollo-boost";
+import { useMutation, useQuery } from "@apollo/react-hooks";
 import { useParams } from "react-router-dom";
 import Post from "../../Components/Post/Post";
-
-const POST_DETAIL_QUERY = gql`
-  query FindOnePost($uuid: String!) {
-    findOnePost(uuid: $uuid) {
-      uuid
-      title
-      content
-      fileUrl
-      createdAt
-      author {
-        nickname
-        avatar
-      }
-    }
-  }
-`;
+import { POST_DETAIL_QUERY, LIKE_POST } from "./Queries";
 
 const PostPage = () => {
   const { uuid } = useParams();
@@ -27,10 +11,36 @@ const PostPage = () => {
       uuid,
     },
   });
+  const [likePostMutation] = useMutation(LIKE_POST, {
+    variables: {
+      postId: uuid,
+    },
+    update(cache, { data }) {
+      let { findOnePost } = cache.readQuery({
+        query: POST_DETAIL_QUERY,
+        variables: {
+          uuid,
+        },
+      });
+
+      if (data.toggleLike) {
+        findOnePost.likeCount = findOnePost.likeCount + 1;
+      } else {
+        findOnePost.likeCount = findOnePost.likeCount - 1;
+      }
+      findOnePost.isLiked = data.toggleLike;
+    },
+  });
+
+  const toggleLike = () => {
+    likePostMutation();
+  };
 
   return (
     <>
-      <Post data={data} loading={loading} />
+      {!loading && data && data.findOnePost && (
+        <Post post={data.findOnePost} toggleLike={toggleLike} />
+      )}
     </>
   );
 };

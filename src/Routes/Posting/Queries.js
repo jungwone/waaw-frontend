@@ -18,11 +18,13 @@ export const UPSERT_POST = gql`
       fileUrl: $fileUrl
     ) {
       id
+      uuid
       title
       content
       category
       open
       fileUrl
+      createdAt
     }
   }
 `;

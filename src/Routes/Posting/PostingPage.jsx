@@ -4,7 +4,6 @@ import PostingForm from "../../Components/Posting/PostingForm";
 import useInput from "../../Hooks/useInput";
 import { UPSERT_POST } from "./Queries";
 import { toast } from "react-toastify";
-import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 const PostingPage = () => {
@@ -15,7 +14,6 @@ const PostingPage = () => {
   const [open, setOpen] = useState(true);
   const fileUrl = useInput("");
   const [file, setFile] = useState();
-  const history = useHistory();
   const [upsertPostMutation] = useMutation(UPSERT_POST);
 
   const onFileChange = (e) => {
@@ -83,7 +81,7 @@ const PostingPage = () => {
       });
       if (upsertPost) {
         toast.success("성공적으로 등록되었습니다. 😉");
-        history.goBack();
+        window.location.href = "/";
       }
     } catch {
       toast.error("서버 요청에 실패했습니다. 😥");
