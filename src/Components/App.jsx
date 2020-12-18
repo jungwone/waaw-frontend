@@ -24,7 +24,7 @@ function App() {
       <>
         <GlobalStyles />
         <Router>
-          {isLoggedIn && <Header />}
+          {isLoggedIn && <Header isLoggedIn={isLoggedIn} />}
           <Routes isLoggedIn={isLoggedIn} />
         </Router>
         <ToastContainer position="top-left" closeOnClick autoClose={4000} />

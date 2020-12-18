@@ -16,7 +16,13 @@ export default createGlobalStyle`
             src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/SDMiSaeng.woff') format('woff');
             font-weight: normal;
             font-style: normal;
-        }    
+        }
+        @font-face {
+           font-family: 'CookieRun-Regular';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/CookieRun-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
     }
     li {
         list-style: none;

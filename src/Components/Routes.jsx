@@ -3,18 +3,23 @@ import { Switch, Route } from "react-router-dom";
 import styled from "styled-components";
 import AuthPage from "../Routes/Auth/AuthPage";
 import HomePage from "../Routes/Home/HomePage";
+import Home from "../Routes/Home/Home";
 import PostingPage from "../Routes/Posting/PostingPage";
 import PostPage from "../Routes/Post/PostPage";
+import Room from "../Routes/Room/Room";
 
 const Routes = ({ isLoggedIn }) => {
   return (
     <RouteWrapper>
       <Switch>
         <Route exact path="/">
-          {isLoggedIn ? <HomePage /> : <AuthPage />}
+          {isLoggedIn ? <Home /> : <AuthPage />}
         </Route>
         <Route exact path="/posting">
           <PostingPage />
+        </Route>
+        <Route exact path="/room/:category">
+          <Room />
         </Route>
         <Route exact path="/post/:uuid">
           <PostPage />
@@ -27,14 +32,8 @@ const Routes = ({ isLoggedIn }) => {
 
 const RouteWrapper = styled.div`
   height: 100vh;
-  padding: 30px;
-  padding-top: 70px;
   position: relative;
   top: ${(props) => props.theme.headerHeight};
-
-  @media (max-width: 768px) {
-    padding: 15px 10px;
-  }
 `;
 
 export default Routes;

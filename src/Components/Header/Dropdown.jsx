@@ -1,0 +1,97 @@
+import React from "react";
+import { Link } from "react-router-dom";
+import { categories, myMenu } from "./Menus";
+import styled from "styled-components";
+
+const Dropdown = ({ closeMobileMenu, className }) => {
+  return (
+    <Wrapper className={className}>
+      <ul>
+        {categories.map((category) => (
+          <Link key={category.id} to={`/room/${category.id}`}>
+            <li onClick={closeMobileMenu}>
+              <Icon className={`${category.id}`}>{category.icon}</Icon>
+              <span>{category.name}</span>
+            </li>
+          </Link>
+        ))}
+        {myMenu.map((menu) => (
+          <Link key={menu.id} to={`/${menu.id}`}>
+            <li onClick={closeMobileMenu}>
+              <Icon className={`${menu.id}`}>{menu.icon}</Icon>
+              <span>{menu.name}</span>
+            </li>
+          </Link>
+        ))}
+      </ul>
+    </Wrapper>
+  );
+};
+
+const Icon = styled.figure`
+  margin-left: -60px;
+  margin-right: 10px;
+
+  svg {
+    width: 30px;
+    height: 30px;
+    /* fill: #f0df2b; */
+
+    fill: #fff;
+  }
+  &.poem {
+    svg {
+      fill: #f0df2b;
+    }
+  }
+  &.novel {
+    svg {
+      fill: #ff7142;
+    }
+  }
+  &.essay {
+    svg {
+      fill: #fa66a6;
+    }
+  }
+
+  &.review {
+    svg {
+      fill: #42b3ff;
+    }
+  }
+`;
+
+const Wrapper = styled.div`
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 70px;
+  background-color: #1c1f24;
+  transition: all 0.3s ease;
+  li {
+    float: unset;
+    padding: 15px 0;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    font-size: 26px;
+
+    &:hover {
+      background-color: #333333;
+    }
+  }
+
+  span {
+    color: #fff;
+  }
+
+  &.hide {
+    transform: translateX(-100vw);
+  }
+  @media (min-width: 568px) {
+    transform: translateX(-100vw);
+  }
+`;
+
+export default Dropdown;
