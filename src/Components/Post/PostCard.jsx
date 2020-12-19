@@ -1,101 +1,87 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { s3url } from "../../config";
 
-const PostCard = ({ id, uuid, title, category, fileUrl }) => {
+const PostCard2 = ({ id, uuid, title, category, fileUrl, author }) => {
   return (
     <Wrapper>
       <Link to={`/post/${uuid}`}>
-        {fileUrl ? (
-          <Image
-            src={`https://waaw-photo-bucket.s3.ap-northeast-2.amazonaws.com/photos/${fileUrl}`}
-          ></Image>
-        ) : (
-          <Image className="title">
-            <ImageText>{title}</ImageText>
-          </Image>
-        )}
-
-        <Title>{title}</Title>
+        <Figure>
+          <img
+            src={
+              fileUrl
+                ? `${s3url}/photos/${fileUrl}`
+                : `${s3url}/marek-piwnicki-uDlWb8uOK2o-unsplash.jpg`
+            }
+            alt="card"
+          />
+        </Figure>
+        <TextBox>
+          <TitleText>{title}</TitleText>
+          <AuthorText>by {author.nickname}</AuthorText>
+        </TextBox>
       </Link>
     </Wrapper>
   );
 };
 
-const Wrapper = styled.li`
-  cursor: pointer;
-  width: 100%;
-  min-width: 80px;
+const Wrapper = styled.div`
+  position: relative;
   height: 320px;
-  min-height: 145px;
   padding: 10px;
-  font-size: 26px;
-  margin-bottom: 10px;
-  border: 1px solid #fafafa;
+  @media (max-width: 768px) {
+    height: 240px;
+  }
 
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    transition: all 0.3s ease-in-out;
+  }
   &:hover {
-    transition: 0.5s;
-    transform: scale(1.05);
+    img {
+      height: 115%;
+      width: 115%;
+    }
   }
-  a {
-    text-decoration: none;
-    color: #000;
-  }
+`;
 
-  /* @media (max-width: 1280px) {
-    font-size: 28px;
-  } */
-  @media (max-width: 980px) {
-    height: 280px;
+const Figure = styled.div`
+  height: 200px;
+  overflow: hidden;
+  @media (max-width: 768px) {
+    height: 160px;
+  }
+`;
+const TextBox = styled.div`
+  padding: 15px 10px;
+  height: 80px;
+  background-color: #f0f0f0;
+  margin-top: 5px;
+  span {
+    display: block;
+  }
+  @media (max-width: 768px) {
+    height: 50px;
     padding: 5px;
   }
-  @media (max-width: 800px) {
-    height: 245px;
-    font-size: 24px;
-  }
+`;
+
+const TitleText = styled.span`
+  font-size: 20px;
   @media (max-width: 768px) {
-    height: 225px;
-    font-size: 20px;
-  }
-  @media (max-width: 568px) {
-    height: 40vw;
+    font-size: 16px;
   }
 `;
 
-const Image = styled.div`
-  height: 75%;
-  background-image: url(${(props) => props.src});
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  margin-bottom: 5px;
+const AuthorText = styled.span`
+  font-size: 12px;
+  padding-top: 10px;
   @media (max-width: 768px) {
-    height: 68%;
-  }
-
-  &.title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #f7f7f7;
-    padding: 10px;
+    font-size: 10px;
   }
 `;
 
-const ImageText = styled.span`
-  word-break: break-all;
-`;
-
-const Title = styled.div`
-  font-family: "SDMiSaeng";
-  padding-top: 5px;
-  padding-left: 5px;
-  height: 25%;
-  background-color: #f7f7f7;
-  line-height: 0.9;
-  @media (max-width: 768px) {
-    height: 30%;
-  }
-`;
-
-export default PostCard;
+export default PostCard2;

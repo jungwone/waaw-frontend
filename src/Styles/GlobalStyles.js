@@ -27,6 +27,10 @@ export default createGlobalStyle`
     li {
         list-style: none;
     }
+    a {
+        text-decoration: none;
+        color: #000;
+    }
     
 
 `;
