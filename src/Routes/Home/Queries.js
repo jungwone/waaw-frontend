@@ -1,4 +1,4 @@
-const { gql } = require("apollo-boost");
+import { gql } from "@apollo/react-hooks";
 
 export const HOME_POST_QUERY = gql`
   query FindManyPostsWithCategory(

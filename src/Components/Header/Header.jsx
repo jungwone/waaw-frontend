@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import {
-  CloseIcon,
-  HamburgerIcon,
-  ProfileIcon,
-  WritingIcon,
-} from "../Icons/Icons";
+import { CloseIcon, HamburgerIcon } from "../Icons/Icons";
 import { categories } from "./Menus";
 import Dropdown from "./Dropdown";
 
@@ -14,7 +9,7 @@ const Header = ({ isLoggedIn }) => {
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
-  console.log(isLoggedIn);
+
   return (
     <>
       <HeaderStyle>

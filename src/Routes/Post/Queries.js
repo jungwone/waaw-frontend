@@ -9,6 +9,7 @@ export const POST_DETAIL_QUERY = gql`
       fileUrl
       likeCount
       isLiked
+      commentCount
       createdAt
       author {
         uuid

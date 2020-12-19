@@ -52,7 +52,7 @@ const Post = ({ post, toggleLike }) => {
           <Button>
             <CommentIcon />
           </Button>
-          <CountText>16</CountText>
+          <CountText>{post.commentCount}</CountText>
         </Buttons>
       </Wrapper>
     </>

@@ -19,12 +19,11 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   max-height: 400px;
-  position: absolute;
+  position: relative;
   background-image: url(${(props) => props.src});
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  border: 1px solid gray;
   display: flex;
   align-items: center;
   justify-content: center;

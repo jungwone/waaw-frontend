@@ -15,9 +15,8 @@ const HomePage = () => {
     return () => {
       setSkip(0);
       setHasMore(true);
-      category.setValue("ALL");
     };
-  }, [skip, hasMore, category]);
+  }, [skip, hasMore]);
 
   const { data, loading, fetchMore } = useQuery(HOME_POST_QUERY, {
     variables:
@@ -39,9 +38,9 @@ const HomePage = () => {
         if (!fetchMoreResult) {
           return prev;
         } else {
-          if (fetchMoreResult.findManyPostsWithCategory.length < take) {
-            setHasMore(false);
-          }
+          // if (fetchMoreResult.findManyPostsWithCategory.length < take) {
+          //   setHasMore(false);
+          // }
           fetchMoreResult.findManyPostsWithCategory = [
             ...prev.findManyPostsWithCategory,
             ...fetchMoreResult.findManyPostsWithCategory,
