@@ -25,11 +25,9 @@ export const resolvers = {
 
 export const typeDefs = gql`
   enum Category {
-    POEM
-    NOVEL
-    REVIEW
-    FREE
-    ESSAY
-    RELATIONSHIP
+    essay
+    review
+    dream
+    poem
   }
 `;

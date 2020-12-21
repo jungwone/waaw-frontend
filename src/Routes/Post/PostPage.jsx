@@ -3,6 +3,7 @@ import { useMutation, useQuery } from "@apollo/react-hooks";
 import { useParams } from "react-router-dom";
 import Post from "../../Components/Post/Post";
 import { POST_DETAIL_QUERY, LIKE_POST } from "./Queries";
+import { toast } from "react-toastify";
 
 const PostPage = () => {
   const { uuid } = useParams();
@@ -33,7 +34,10 @@ const PostPage = () => {
   });
 
   const toggleLike = () => {
-    likePostMutation();
+    likePostMutation().catch((e) => {
+      toast.error("오류가 발생했습니다. 다시 시도해주세요");
+      // console.log(e.message);
+    });
   };
 
   return (

@@ -93,6 +93,7 @@ const AuthPage = () => {
           localLoginMutation({
             variables: { token },
           });
+          window.location.href = "/";
         }
       } catch {
         toast.error(
