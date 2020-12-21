@@ -64,6 +64,7 @@ const Icon = styled.figure`
 
 const Wrapper = styled.div`
   position: absolute;
+  z-index: 20;
   width: 100vw;
   height: 100vh;
   top: 70px;

@@ -48,17 +48,17 @@ const PostListWrapper = styled.ul`
   width: 100%;
   display: grid;
   gap: 30px;
-  grid-template-columns: repeat(4, 22%);
+  grid-template-columns: repeat(4, 1fr);
   justify-content: center;
   align-items: center;
 
   @media (max-width: 1280px) {
-    grid-template-columns: repeat(3, 30%);
+    grid-template-columns: repeat(3, 1fr);
     gap: 15px;
   }
 
   @media (max-width: 568px) {
-    grid-template-columns: repeat(2, 45%);
+    grid-template-columns: repeat(2, 1fr);
     gap: 15px;
   }
 `;

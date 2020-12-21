@@ -28,10 +28,9 @@ const responsive = {
 };
 
 const PostSlider = ({ posts }) => {
-  console.log("posts : ", posts);
   return (
     <Wrapper>
-      <h2>방금 쓰여진 글</h2>
+      <h2>최근 인기 글</h2>
       <Carousel
         additionalTransfrom={0}
         arrows
@@ -82,6 +81,9 @@ const Wrapper = styled.div`
     text-align: center;
     letter-spacing: 2px;
     padding: 1.5rem 0;
+  }
+  .react-multiple-carousel__arrow {
+    z-index: 4;
   }
 `;
 
