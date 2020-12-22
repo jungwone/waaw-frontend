@@ -3,15 +3,15 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { s3url } from "../../config";
 
-const PostCard2 = ({ id, uuid, title, category, fileUrl, author }) => {
+const PostCard2 = ({ id, uuid, title, category, thumbnail, author }) => {
   return (
     <Wrapper>
       <Link to={`/post/${uuid}`}>
         <Figure>
           <img
             src={
-              fileUrl
-                ? `${s3url}/photos/${fileUrl}`
+              thumbnail
+                ? `${s3url}/photos/${thumbnail}`
                 : `${s3url}/marek-piwnicki-uDlWb8uOK2o-unsplash.jpg`
             }
             alt="card"

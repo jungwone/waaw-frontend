@@ -3,8 +3,8 @@ import { Switch, Route } from "react-router-dom";
 import styled from "styled-components";
 import AuthPage from "../Routes/Auth/AuthPage";
 import Home from "../Routes/Home/Home";
-import PostingPage3 from "../Routes/Posting/PostingPage3";
 import PostingPage from "../Routes/Posting/PostingPage";
+
 import PostPage from "../Routes/Post/PostPage";
 import Room from "../Routes/Room/Room";
 
@@ -16,9 +16,6 @@ const Routes = ({ isLoggedIn }) => {
           {isLoggedIn ? <Home /> : <AuthPage />}
         </Route>
         <Route exact path="/posting">
-          <PostingPage3 />
-        </Route>
-        <Route exact path="/posting2">
           <PostingPage />
         </Route>
 

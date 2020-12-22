@@ -59,7 +59,7 @@ const PostSlider = ({ posts }) => {
                 : post.title
             }`}
             category={post.category}
-            fileUrl={post.fileUrl}
+            thumbnail={post.thumbnail}
             author={post.author}
           />
         ))}

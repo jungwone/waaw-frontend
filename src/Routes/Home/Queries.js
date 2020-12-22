@@ -7,8 +7,8 @@ export const POPULAR_POST_QUERY = gql`
       uuid
       title
       content
-      fileUrl
       likeCount
+      thumbnail
       createdAt
       author {
         id
@@ -31,7 +31,7 @@ export const HOME_POST_QUERY = gql`
       title
       content
       category
-      fileUrl
+      thumbnail
       createdAt
       author {
         id
