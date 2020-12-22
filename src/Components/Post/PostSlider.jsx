@@ -74,12 +74,14 @@ const PostSlider = ({ posts }) => {
 };
 
 const Wrapper = styled.div`
-  height: 380px;
+  height: 450px;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding-top: 30px;
+  padding-bottom: 70px;
+
   h2 {
     font-family: "CookieRun-Regular";
     font-size: 25px;

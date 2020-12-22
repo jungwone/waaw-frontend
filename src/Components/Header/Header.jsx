@@ -21,7 +21,7 @@ const Header = ({ isLoggedIn }) => {
           <MyMenu>
             {myMenu.map((menu) => (
               <BarListItem key={menu.id}>
-                <Link to="/posting">
+                <Link to={`/${menu.id}`}>
                   {menu.icon}
                   {menu.name}
                 </Link>

@@ -1,4 +1,5 @@
 import {
+  DoorIcon,
   EssayIcon,
   NovelIcon,
   PoemIcon,
@@ -31,6 +32,11 @@ export const categories = [
 ];
 
 export const myMenu = [
+  {
+    id: "board",
+    name: "글읽기",
+    icon: <DoorIcon />,
+  },
   {
     id: "posting",
     name: "글쓰기",

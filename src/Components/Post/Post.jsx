@@ -82,10 +82,10 @@ const CountText = styled.span`
 const Wrapper = styled.div`
   max-width: 800px;
   margin: 0 auto;
-  font-family: "SDMiSaeng";
+  font-family: "RIDIBatang";
   padding-top: 20px;
   padding-bottom: 30px;
-  font-size: 26px;
+  font-size: 16px;
   padding: 0 10px;
 `;
 
@@ -95,16 +95,19 @@ const PostContentBox = styled.section`
 
 const Title = styled.div`
   overflow-wrap: break-word;
-  font-size: 50px;
+  font-size: 32px;
   margin-bottom: 25px;
   text-align: center;
   @media (max-width: 568px) {
-    font-size: 30px;
+    font-size: 23px;
   }
 `;
 
 const Content = styled.div`
   margin-bottom: 25px;
+  font-size: 16px;
+  letter-spacing: 0.6px;
+  line-height: 1.5;
   img {
     width: 100%;
   }

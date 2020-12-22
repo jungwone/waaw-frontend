@@ -210,6 +210,8 @@ const Wrapper = styled.form`
   padding: 100px 10px 100px 10px;
   max-width: 800px;
   margin: 0 auto;
+  font-family: "RIDIBatang";
+  letter-spacing: 1px;
   h2 {
     font-size: 30px;
     text-align: center;
@@ -218,6 +220,7 @@ const Wrapper = styled.form`
 `;
 
 const Title = styled(Input)`
+  font-family: "RIDIBatang";
   font-size: 20px;
   height: 50px;
   &:focus {
@@ -237,7 +240,8 @@ const Editor = styled.div`
   padding-bottom: 30px;
   .ql-container {
     height: 500px;
-    /* font-family: "SDMiSaeng"; */
+    font-family: "RIDIBatang";
+    letter-spacing: 0.6px;
     font-size: 16px;
   }
 `;

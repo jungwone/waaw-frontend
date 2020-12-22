@@ -6,7 +6,7 @@ export const POST_DETAIL_QUERY = gql`
       uuid
       title
       content
-      fileUrl
+      thumbnail
       likeCount
       isLiked
       commentCount

@@ -30,6 +30,7 @@ const Wrapper = styled.div`
   position: relative;
   height: 320px;
   padding: 10px;
+  font-family: "RIDIBatang";
   @media (max-width: 768px) {
     height: 240px;
   }
@@ -42,8 +43,7 @@ const Wrapper = styled.div`
   }
   &:hover {
     img {
-      height: 115%;
-      width: 115%;
+      transform: scale(1.2);
     }
   }
 `;
