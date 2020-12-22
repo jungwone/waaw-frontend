@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { CloseIcon, HamburgerIcon } from "../Icons/Icons";
-import { categories } from "./Menus";
+import { myMenu } from "./Menus";
 import Dropdown from "./Dropdown";
 
 const Header = ({ isLoggedIn }) => {
@@ -17,26 +17,18 @@ const Header = ({ isLoggedIn }) => {
           <Logo>
             <LogoText to="/">글의 집</LogoText>
           </Logo>
-          <MenuList>
-            <CategoryMenu>
-              {categories.map((category) => (
-                <Link key={category.id} to={`/room/${category.id}`}>
-                  <BarListItem>
-                    <span>{category.name}</span>
-                  </BarListItem>
-                </Link>
-              ))}
-            </CategoryMenu>
 
-            <MyMenu>
-              <BarListItem>
-                <Link to="/posting">글쓰기</Link>
+          <MyMenu>
+            {myMenu.map((menu) => (
+              <BarListItem key={menu.id}>
+                <Link to="/posting">
+                  {menu.icon}
+                  {menu.name}
+                </Link>
               </BarListItem>
-              <BarListItem>
-                <Link to="/profile">내 정보</Link>
-              </BarListItem>
-            </MyMenu>
-          </MenuList>
+            ))}
+          </MyMenu>
+
           <BarIcon onClick={handleClick}>
             {!click ? (
               <button>
@@ -72,33 +64,38 @@ const BarIcon = styled.div`
   }
 `;
 
-const MenuList = styled.div`
-  width: 80%;
+const MyMenu = styled.ul`
+  margin-left: auto;
   height: 100%;
   display: flex;
   align-items: center;
-  margin: 0 auto;
+
+  svg {
+    position: relative;
+    top: 2px;
+    right: 2px;
+    padding-top: 3px;
+  }
+
   @media (max-width: 568px) {
     display: none;
   }
 `;
-
-const CategoryMenu = styled.ul`
-  margin: 0 auto;
-`;
-
-const MyMenu = styled.ul``;
 const BarListItem = styled.li`
   float: left;
   margin-left: 25px;
-  font-size: 25px;
+  font-size: 20px;
+
   &:hover {
     a {
       color: skyblue;
     }
+    svg {
+      fill: skyblue;
+    }
   }
   @media (max-width: 768px) {
-    font-size: 20px;
+    font-size: 16px;
   }
 `;
 
@@ -137,7 +134,7 @@ const Logo = styled.div`
 `;
 
 const LogoText = styled(Link)`
-  font-size: 40px;
+  font-size: 36px;
 
   @media (max-width: 768px) {
     font-size: 25px;

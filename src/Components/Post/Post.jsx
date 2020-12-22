@@ -12,13 +12,8 @@ const Post = ({ post, toggleLike }) => {
       <Wrapper>
         <PostContentBox>
           <Title>{post.title}</Title>
-          {post.fileUrl && (
-            <ImageWrapper>
-              <Image src={`${s3url}/photos/${post.fileUrl}`} alt="hey" />
-            </ImageWrapper>
-          )}
 
-          <Content>{post.content}</Content>
+          <Content dangerouslySetInnerHTML={{ __html: post.content }}></Content>
           <DateText>
             {moment(Number(post.createdAt)).format("YYYY. MM. DD. H : mm")}
           </DateText>
@@ -85,25 +80,17 @@ const CountText = styled.span`
 `;
 
 const Wrapper = styled.div`
-  max-width: 500px;
+  max-width: 800px;
   margin: 0 auto;
   font-family: "SDMiSaeng";
   padding-top: 20px;
   padding-bottom: 30px;
   font-size: 26px;
+  padding: 0 10px;
 `;
 
 const PostContentBox = styled.section`
   margin-bottom: 25px;
-`;
-
-const ImageWrapper = styled.div`
-  margin-bottom: 30px;
-`;
-
-const Image = styled.img`
-  width: 100%;
-  border-radius: 5px;
 `;
 
 const Title = styled.div`
@@ -116,10 +103,11 @@ const Title = styled.div`
   }
 `;
 
-const Content = styled.pre`
-  white-space: pre-wrap;
-  line-height: 1.3;
+const Content = styled.div`
   margin-bottom: 25px;
+  img {
+    width: 100%;
+  }
 
   @media (max-width: 568px) {
     font-size: 23px;

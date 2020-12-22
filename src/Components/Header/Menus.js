@@ -9,23 +9,23 @@ import {
 
 export const categories = [
   {
-    id: "poem",
-    name: "시",
-    icon: <PoemIcon />,
-  },
-  {
-    id: "novel",
-    name: "소설",
-    icon: <NovelIcon />,
-  },
-  {
     id: "essay",
-    name: "수필",
+    name: "수필인의 방",
     icon: <EssayIcon />,
   },
   {
+    id: "poem",
+    name: "시인의 방",
+    icon: <PoemIcon />,
+  },
+  {
+    id: "dream",
+    name: "꿈의 방",
+    icon: <NovelIcon />,
+  },
+  {
     id: "review",
-    name: "리뷰",
+    name: "리뷰(책, 영화)",
     icon: <ReviewIcon />,
   },
 ];

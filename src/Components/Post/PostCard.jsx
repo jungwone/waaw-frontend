@@ -72,7 +72,7 @@ const TextBox = styled.div`
 const TitleText = styled.span`
   font-size: 20px;
   @media (max-width: 768px) {
-    font-size: 16px;
+    font-size: 12px;
   }
 `;
 

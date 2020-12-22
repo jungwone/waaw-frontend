@@ -11,7 +11,7 @@ const Dropdown = ({ closeMobileMenu, className }) => {
           <Link key={category.id} to={`/room/${category.id}`}>
             <li onClick={closeMobileMenu}>
               <Icon className={`${category.id}`}>{category.icon}</Icon>
-              <span>{category.name}</span>
+              <span className={category.id}>{category.name}</span>
             </li>
           </Link>
         ))}
@@ -44,7 +44,7 @@ const Icon = styled.figure`
       fill: #f0df2b;
     }
   }
-  &.novel {
+  &.dream {
     svg {
       fill: #ff7142;
     }
@@ -77,9 +77,25 @@ const Wrapper = styled.div`
     width: 100%;
     justify-content: center;
     font-size: 26px;
+    transition: all 0.3s linear;
 
     &:hover {
       background-color: #333333;
+      span {
+        transition: all 0.3s linear;
+        &.essay {
+          color: #fa66a6;
+        }
+        &.poem {
+          color: #f0df2b;
+        }
+        &.dream {
+          color: #ff7142;
+        }
+        &.review {
+          color: #42b3ff;
+        }
+      }
     }
   }
 

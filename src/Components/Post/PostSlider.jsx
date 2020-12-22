@@ -11,8 +11,13 @@ const responsive = {
     partialVisibilityGutter: 40,
   },
   desktop: {
-    breakpoint: { max: 3000, min: 1024 },
+    breakpoint: { max: 3000, min: 1200 },
     items: 4,
+    partialVisibilityGutter: 40,
+  },
+  deblet: {
+    breakpoint: { max: 1200, min: 1024 },
+    items: 3,
     partialVisibilityGutter: 40,
   },
   tablet: {
@@ -69,7 +74,7 @@ const PostSlider = ({ posts }) => {
 };
 
 const Wrapper = styled.div`
-  height: 350px;
+  height: 380px;
   width: 100%;
   display: flex;
   flex-direction: column;

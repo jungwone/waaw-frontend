@@ -19,8 +19,8 @@ const PostingPage = () => {
   const title = useInput("");
   const category = useInput("");
   const [open, setOpen] = useState(true);
-  const [upsertPostMutation] = useMutation(UPSERT_POST);
   const [thumbnail, setThumbnail] = useState();
+  const [upsertPostMutation] = useMutation(UPSERT_POST);
 
   const onChangeOpen = () => {
     setOpen((prev) => !prev);
