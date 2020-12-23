@@ -1,5 +1,4 @@
 import {
-  DoorIcon,
   EssayIcon,
   NovelIcon,
   PoemIcon,
@@ -12,31 +11,30 @@ export const categories = [
   {
     id: "essay",
     name: "수필인의 방",
+    s_name: "수필",
     icon: <EssayIcon />,
   },
   {
     id: "poem",
     name: "시인의 방",
+    s_name: "시",
     icon: <PoemIcon />,
   },
   {
     id: "dream",
-    name: "꿈의 방",
+    name: "꿈일기의 방",
+    s_name: "꿈일기",
     icon: <NovelIcon />,
   },
   {
     id: "review",
-    name: "리뷰(책, 영화)",
+    name: "리뷰방(책, 영화)",
+    s_name: "리뷰",
     icon: <ReviewIcon />,
   },
 ];
 
 export const myMenu = [
-  {
-    id: "board",
-    name: "글읽기",
-    icon: <DoorIcon />,
-  },
   {
     id: "posting",
     name: "글쓰기",

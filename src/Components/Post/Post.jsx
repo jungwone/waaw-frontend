@@ -83,10 +83,9 @@ const Wrapper = styled.div`
   max-width: 800px;
   margin: 0 auto;
   font-family: "RIDIBatang";
-  padding-top: 20px;
   padding-bottom: 30px;
   font-size: 16px;
-  padding: 0 10px;
+  padding: 100px 10px 30px 10px;
 `;
 
 const PostContentBox = styled.section`
@@ -108,12 +107,13 @@ const Content = styled.div`
   font-size: 16px;
   letter-spacing: 0.6px;
   line-height: 1.5;
+  min-height: 300px;
   img {
     width: 100%;
   }
 
   @media (max-width: 568px) {
-    font-size: 23px;
+    font-size: 13px;
   }
 `;
 

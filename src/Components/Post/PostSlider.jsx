@@ -74,20 +74,24 @@ const PostSlider = ({ posts }) => {
 };
 
 const Wrapper = styled.div`
-  height: 450px;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: 30px;
+  padding-top: 100px;
   padding-bottom: 70px;
+  @media (max-width: 568px) {
+    padding-top: 50px;
+  }
 
   h2 {
-    font-family: "CookieRun-Regular";
-    font-size: 25px;
+    font-size: 2rem;
     text-align: center;
     letter-spacing: 2px;
     padding: 1.5rem 0;
+    @media (max-width: 568px) {
+      font-size: 25px;
+    }
   }
   .react-multiple-carousel__arrow {
     z-index: 4;

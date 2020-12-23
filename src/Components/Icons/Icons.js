@@ -129,8 +129,8 @@ export const ReviewIcon = () => (
 export const DoorIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="24pt"
-    height="24pt"
+    width="40pt"
+    height="40pt"
     viewBox="0 0 50 50"
     version="1.1"
   >

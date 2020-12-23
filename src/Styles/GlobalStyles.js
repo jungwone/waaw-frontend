@@ -9,8 +9,8 @@ export default createGlobalStyle`
     }
 
     body {
-        font-size: 14px;
-
+        font-size: 14px;       
+        
         @font-face {
            font-family: 'SDMiSaeng';
             src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/SDMiSaeng.woff') format('woff');
@@ -29,6 +29,7 @@ export default createGlobalStyle`
             font-weight: normal;
             font-style: normal;
         }
+        font-family: "RIDIBatang";
     }
     li {
         list-style: none;

@@ -4,9 +4,8 @@ import styled from "styled-components";
 import AuthPage from "../Routes/Auth/AuthPage";
 import Home from "../Routes/Home/Home";
 import PostingPage from "../Routes/Posting/PostingPage";
-
 import PostPage from "../Routes/Post/PostPage";
-import Room from "../Routes/Room/Room";
+import BoardPage from "../Routes/Board/BoardPage";
 
 const Routes = ({ isLoggedIn }) => {
   return (
@@ -18,9 +17,8 @@ const Routes = ({ isLoggedIn }) => {
         <Route exact path="/posting">
           <PostingPage />
         </Route>
-
-        <Route exact path="/room/:category">
-          <Room />
+        <Route exact path="/board/:category">
+          <BoardPage />
         </Route>
         <Route exact path="/post/:uuid">
           <PostPage />

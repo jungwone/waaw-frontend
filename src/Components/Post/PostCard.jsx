@@ -58,7 +58,7 @@ const Figure = styled.div`
 const TextBox = styled.div`
   padding: 15px 10px;
   height: 80px;
-  background-color: #f0f0f0;
+  background-color: #fff;
   margin-top: 5px;
   span {
     display: block;
