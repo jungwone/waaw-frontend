@@ -17,14 +17,20 @@ const Header = ({ isLoggedIn }) => {
           <Logo>
             <LogoText to="/">글의 집</LogoText>
           </Logo>
+          {/* <CategoryMenu>
+            {categories.map((category) => (
+              <BarListItem key={category.id}>
+                <Link to={`/board?category=${category.id}`}>
+                  {category.s_name}
+                </Link>
+              </BarListItem>
+            ))}
+          </CategoryMenu> */}
 
           <MyMenu>
             {myMenu.map((menu) => (
               <BarListItem key={menu.id}>
-                <Link to={`/${menu.id}`}>
-                  {menu.icon}
-                  {menu.name}
-                </Link>
+                <Link to={`/${menu.id}`}>{menu.icon}</Link>
               </BarListItem>
             ))}
           </MyMenu>
@@ -63,6 +69,14 @@ const BarIcon = styled.div`
     background-color: inherit;
   }
 `;
+
+// const CategoryMenu = styled.ul`
+//   margin: 0 auto;
+//   display: flex;
+//   @media (max-width: 568px) {
+//     display: none;
+//   }
+// `;
 
 const MyMenu = styled.ul`
   margin-left: auto;

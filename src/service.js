@@ -16,3 +16,9 @@ export const imageUploadToServer = async (file) => {
     toast.error("이미지 업로드 요청에 실패했습니다.");
   }
 };
+
+export const getCeilNumber = (number) => {
+  if (typeof number === "number") {
+    return Math.ceil(number);
+  } else return 1;
+};

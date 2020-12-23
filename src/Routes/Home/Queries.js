@@ -18,26 +18,3 @@ export const POPULAR_POST_QUERY = gql`
     }
   }
 `;
-
-export const HOME_POST_QUERY = gql`
-  query FindManyPostsWithCategory(
-    $category: Category
-    $skip: Int!
-    $take: Int!
-  ) {
-    findManyPostsWithCategory(category: $category, skip: $skip, take: $take) {
-      id
-      uuid
-      title
-      content
-      category
-      thumbnail
-      createdAt
-      author {
-        id
-        nickname
-        avatar
-      }
-    }
-  }
-`;
