@@ -5,6 +5,7 @@ import Post from "../../Components/Post/Post";
 import { POST_DETAIL_QUERY, LIKE_POST } from "./Queries";
 import { toast } from "react-toastify";
 import { WhiteWrapper } from "../../Styles/Wrapper";
+import CommentList from "../../Components/Comment/CommentList";
 
 const PostPage = () => {
   const { uuid } = useParams();
@@ -44,7 +45,10 @@ const PostPage = () => {
   return (
     <WhiteWrapper>
       {!loading && data && data.findOnePost && (
-        <Post post={data.findOnePost} toggleLike={toggleLike} />
+        <>
+          <Post post={data.findOnePost} toggleLike={toggleLike} />
+          <CommentList />
+        </>
       )}
     </WhiteWrapper>
   );
