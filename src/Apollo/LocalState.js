@@ -6,8 +6,8 @@ export const defaults = {
 
 export const resolvers = {
   Mutation: {
-    loginUser: (_, { token }, { cache }) => {
-      localStorage.setItem("waawToken", token);
+    loginUser: (_, { myInfo }, { cache }) => {
+      localStorage.setItem("waawToken", JSON.stringify(myInfo));
       cache.writeData({
         data: {
           isLoggedIn: true,
@@ -29,5 +29,12 @@ export const typeDefs = gql`
     review
     dream
     poem
+  }
+
+  type MyInfo {
+    id: ID!
+    uuid: String!
+    avatar: String!
+    token: String!
   }
 `;

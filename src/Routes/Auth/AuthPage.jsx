@@ -81,7 +81,7 @@ const AuthPage = () => {
       }
       try {
         const {
-          data: { confirmLoginCode: token },
+          data: { confirmLoginCode: myInfo },
         } = await confirmLoginCodeMutation({
           variables: {
             email: email.value,
@@ -89,9 +89,9 @@ const AuthPage = () => {
           },
         });
 
-        if (token) {
+        if (myInfo) {
           localLoginMutation({
-            variables: { token },
+            variables: { myInfo },
           });
           window.location.href = "/";
         }

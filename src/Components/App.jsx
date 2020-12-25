@@ -19,6 +19,7 @@ function App() {
   const {
     data: { isLoggedIn },
   } = useQuery(APP_QUERY);
+  console.log(isLoggedIn);
   return (
     <ThemeProvider theme={Theme}>
       <>
