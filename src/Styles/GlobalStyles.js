@@ -9,14 +9,9 @@ export default createGlobalStyle`
     }
 
     body {
-        font-size: 14px;       
-        
-        @font-face {
-           font-family: 'SDMiSaeng';
-            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/SDMiSaeng.woff') format('woff');
-            font-weight: normal;
-            font-style: normal;
-        }
+        font-size: 14px;
+        letter-spacing:1px;
+
         @font-face {
            font-family: 'CookieRun-Regular';
             src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/CookieRun-Regular.woff') format('woff');

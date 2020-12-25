@@ -25,3 +25,35 @@ export const LIKE_POST = gql`
     toggleLike(postId: $postId)
   }
 `;
+
+export const CREATE_COMMENT = gql`
+  mutation CreateComment($postId: String!, $content: String!) {
+    createComment(postId: $postId, content: $content) {
+      id
+      uuid
+      content
+      createdAt
+      user {
+        uuid
+        nickname
+        avatar
+      }
+    }
+  }
+`;
+
+export const COMMENT_LIST_QUERY = gql`
+  query FindManyComments($postId: String!, $skip: Int, $take: Int) {
+    findManyComments(postId: $postId, skip: $skip, take: $take) {
+      id
+      uuid
+      content
+      createdAt
+      user {
+        uuid
+        nickname
+        avatar
+      }
+    }
+  }
+`;

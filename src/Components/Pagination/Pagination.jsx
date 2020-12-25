@@ -3,7 +3,6 @@ import MaterialPagination from "@material-ui/lab/Pagination";
 import styled from "styled-components";
 
 const Pagination = ({ totalPage, handlePage, page }) => {
-  console.log(totalPage);
   return (
     <Wrapper>
       <MaterialPagination

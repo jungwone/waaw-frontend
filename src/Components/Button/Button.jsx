@@ -23,6 +23,10 @@ const ButtonStyle = styled.button`
   font-family: inherit;
   font-size: 14px;
   cursor: pointer;
+
+  @media (max-width: 568px) {
+    font-size: 12px;
+  }
 `;
 
 export default Button;

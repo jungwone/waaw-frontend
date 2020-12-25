@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import Pagination from "../../Components/Pagination/Pagination";
-import Board from "../../Components/Board/Board";
+import Pagination from "../../components/Pagination/Pagination";
+import Board from "../../components/Board/Board";
 import queryString from "query-string";
 import { useQuery } from "@apollo/react-hooks";
 import { BOARD_QUERY } from "./Query";
-import { GrayWrapper } from "../../Styles/Wrapper";
+import { GrayWrapper } from "../../styles/Wrapper";
 import { getCeilNumber } from "../../service";
 
 let take = 2;
@@ -50,7 +50,7 @@ const BoardPage = () => {
             totalPage={
               data.findManyPostsWithCategory.length > 0
                 ? getCeilNumber(
-                    data.findManyPostsWithCategory[0].totalPostCount
+                    data.findManyPostsWithCategory[0].totalPostCount / take
                   )
                 : 1
             }

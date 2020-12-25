@@ -2,13 +2,26 @@ import React from "react";
 import styled from "styled-components";
 import Comment from "./Comment";
 
-const CommentList = () => {
+const CommentList = ({ commentData, getMoreComments, newComment }) => {
   return (
     <Wrapper>
-      <ul>
-        <Comment />
-        <Comment />
-      </ul>
+      {commentData && (
+        <>
+          <ul>
+            {commentData.map((comment) => (
+              <Comment key={comment.uuid} comment={comment} />
+            ))}
+            {newComment &&
+              newComment.length > 0 &&
+              newComment.map((comment) => (
+                <Comment key={comment.uuid} comment={comment} />
+              ))}
+          </ul>
+          <MoreButton>
+            <button onClick={getMoreComments}>댓글 더 불러오기</button>
+          </MoreButton>
+        </>
+      )}
     </Wrapper>
   );
 };
@@ -16,9 +29,27 @@ const CommentList = () => {
 const Wrapper = styled.div`
   max-width: 800px;
   margin: 0 auto;
-  padding: 20px 20px 130px 20px;
-  border-top: 1px solid #888888;
-  border-bottom: 1px solid #888888;
+
+  ul {
+    border-top: 1px solid #888888;
+
+    padding: 20px 20px 10px 20px;
+  }
+`;
+
+const MoreButton = styled.div`
+  padding-left: 20px;
+  height: 30px;
+
+  button {
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background-color: #fff;
+    width: 100%;
+    height: 100%;
+    color: #888888;
+  }
 `;
 
 export default CommentList;
