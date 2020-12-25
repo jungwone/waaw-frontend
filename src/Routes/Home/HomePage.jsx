@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { HOME_POST_QUERY } from "./Queries";
-import PostList from "../../Components/Post/PostList";
-import CategoryTab from "../../Components/CategoryTab/CategoryTab";
-import useInput from "../../Hooks/useInput";
-import InfiniteScroll from "../../Components/InfiniteScroll/InfiniteScroll";
+import PostList from "../../components/Post/PostList";
+import CategoryTab from "../../components/CategoryTab/CategoryTab";
+import useInput from "../../hooks/useInput";
+import InfiniteScroll from "../../components/InfiniteScroll/InfiniteScroll";
 let take = 10;
 const HomePage = () => {
   const [skip, setSkip] = useState(0);

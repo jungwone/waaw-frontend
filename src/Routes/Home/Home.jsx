@@ -1,10 +1,10 @@
 import React from "react";
-import Banner from "../../Components/Banner/Banner";
-import PostSlider from "../../Components/Post/PostSlider";
+import Banner from "../../components/Banner/Banner";
+import PostSlider from "../../components/Post/PostSlider";
 import { useQuery } from "@apollo/react-hooks";
 import { POPULAR_POST_QUERY } from "./Queries";
-import Room from "../../Components/Room/Room";
-import { GrayWrapper } from "../../Styles/Wrapper";
+import Room from "../../components/Room/Room";
+import { GrayWrapper } from "../../styles/Wrapper";
 
 const Home = () => {
   const { data, loading } = useQuery(POPULAR_POST_QUERY, {

@@ -73,7 +73,6 @@ const Category = styled.div`
 `;
 
 const Title = styled(Input)`
-  font-family: "SDMiSaeng";
   font-size: 30px;
   &:focus {
     outline: none;
@@ -85,7 +84,6 @@ const Title = styled(Input)`
 `;
 
 const TextArea = styled(TextareaAutoSize)`
-  font-family: "SDMiSaeng" !important;
   font-size: 26px;
   width: 100%;
   resize: none;

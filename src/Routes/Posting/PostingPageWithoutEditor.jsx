@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/react-hooks";
-import PostingForm from "../../Components/Posting/PostingForm";
-import useInput from "../../Hooks/useInput";
+import PostingForm from "../../components/Posting/PostingForm";
+import useInput from "../../hooks/useInput";
 import { UPSERT_POST } from "./Queries";
 import { toast } from "react-toastify";
 import axios from "axios";

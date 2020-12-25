@@ -4,8 +4,8 @@ import { ToastContainer } from "react-toastify";
 import { gql } from "apollo-boost";
 import { useQuery } from "@apollo/react-hooks";
 import "react-toastify/dist/ReactToastify.css";
-import GlobalStyles from "../Styles/GlobalStyles";
-import Theme from "../Styles/Theme";
+import GlobalStyles from "../styles/GlobalStyles";
+import Theme from "../styles/Theme";
 import Routes from "./Routes";
 import Header from "./Header/Header";
 

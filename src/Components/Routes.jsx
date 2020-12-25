@@ -1,11 +1,11 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import styled from "styled-components";
-import AuthPage from "../Routes/Auth/AuthPage";
-import Home from "../Routes/Home/Home";
-import PostingPage from "../Routes/Posting/PostingPage";
-import PostPage from "../Routes/Post/PostPage";
-import BoardPage from "../Routes/Board/BoardPage";
+import AuthPage from "../routes/Auth/AuthPage";
+import Home from "../routes/Home/Home";
+import PostingPage from "../routes/Posting/PostingPage";
+import PostPage from "../routes/Post/PostPage";
+import BoardPage from "../routes/Board/BoardPage";
 
 const Routes = ({ isLoggedIn }) => {
   return (

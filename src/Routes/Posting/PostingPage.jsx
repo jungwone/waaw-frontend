@@ -3,15 +3,15 @@ import { useQuill } from "react-quilljs";
 import "quill/dist/quill.snow.css";
 import { s3url } from "../../config";
 import styled from "styled-components";
-import Input from "../../Components/Input/Input";
-import useInput from "../../Hooks/useInput";
-import Button from "../../Components/Button/Button";
-import { Select } from "../../Components/SignUp/SignupForm";
+import Input from "../../components/Input/Input";
+import useInput from "../../hooks/useInput";
+import Button from "../../components/Button/Button";
+import { Select } from "../../components/SignUp/SignupForm";
 import { useMutation } from "@apollo/react-hooks";
 import { UPSERT_POST } from "./Queries";
 import { toast } from "react-toastify";
 import { imageUploadToServer } from "../../service";
-import { CloseIcon } from "../../Components/Icons/Icons";
+import { CloseIcon } from "../../components/Icons/Icons";
 
 const PostingPage = () => {
   const placeholder = "글 쓰는 당신을 응원합니다 🥰";

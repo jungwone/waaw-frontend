@@ -1,8 +1,8 @@
 import { useMutation } from "@apollo/react-hooks";
 import React, { useState } from "react";
-import LoginForm from "../../Components/Login/LoginForm";
-import SignupForm from "../../Components/SignUp/SignupForm";
-import useInput from "../../Hooks/useInput";
+import LoginForm from "../../components/Login/LoginForm";
+import SignupForm from "../../components/SignUp/SignupForm";
+import useInput from "../../hooks/useInput";
 import {
   CONFIRM_LOGIN_CODE,
   CREATE_ACCOUNT,

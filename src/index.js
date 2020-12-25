@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./Components/App";
+import App from "./components/App";
 import { ApolloProvider } from "@apollo/react-hooks";
-import ApolloClient from "./Apollo/ApolloClient";
+import ApolloClient from "./apollo/ApolloClient";
 import "./index.css";
 
 ReactDOM.render(
