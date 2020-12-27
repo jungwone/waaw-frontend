@@ -33,3 +33,9 @@ export const LOCAL_LOGIN = gql`
     loginUser(myInfo: $myInfo) @client
   }
 `;
+
+export const LOGOUT = gql`
+  mutation LogoutUser {
+    logoutUser @client
+  }
+`;

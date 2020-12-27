@@ -18,7 +18,7 @@ const ButtonStyle = styled.button`
   font-weight: 600;
   background-color: ${(props) => (props.bgColor ? props.bgColor : "#6cd47f")};
   text-align: center;
-  padding: 7px 0px;
+  padding: 7px 4px;
   text-decoration: none;
   font-family: inherit;
   font-size: 14px;

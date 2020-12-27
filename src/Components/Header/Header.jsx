@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 import { CloseIcon, HamburgerIcon } from "../Icons/Icons";
 import { myMenu } from "./Menus";
 import Dropdown from "./Dropdown";
+import Button from "../Button/Button";
 
-const Header = ({ isLoggedIn }) => {
+const Header = ({ isLoggedIn, logout }) => {
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
@@ -17,15 +18,6 @@ const Header = ({ isLoggedIn }) => {
           <Logo>
             <LogoText to="/">글의 집</LogoText>
           </Logo>
-          {/* <CategoryMenu>
-            {categories.map((category) => (
-              <BarListItem key={category.id}>
-                <Link to={`/board?category=${category.id}`}>
-                  {category.s_name}
-                </Link>
-              </BarListItem>
-            ))}
-          </CategoryMenu> */}
 
           <MyMenu>
             {myMenu.map((menu) => (
@@ -33,6 +25,9 @@ const Header = ({ isLoggedIn }) => {
                 <Link to={`/${menu.id}`}>{menu.icon}</Link>
               </BarListItem>
             ))}
+            <BarListItem>
+              <Button text="로그아웃" bgColor="#119100" onClick={logout} />
+            </BarListItem>
           </MyMenu>
 
           <BarIcon onClick={handleClick}>
@@ -50,6 +45,7 @@ const Header = ({ isLoggedIn }) => {
         <Dropdown
           className={click ? `visible` : `hide`}
           closeMobileMenu={closeMobileMenu}
+          logout={logout}
         />
       </HeaderStyle>
     </>
@@ -69,14 +65,6 @@ const BarIcon = styled.div`
     background-color: inherit;
   }
 `;
-
-// const CategoryMenu = styled.ul`
-//   margin: 0 auto;
-//   display: flex;
-//   @media (max-width: 568px) {
-//     display: none;
-//   }
-// `;
 
 const MyMenu = styled.ul`
   margin-left: auto;
