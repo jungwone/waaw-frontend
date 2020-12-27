@@ -6,14 +6,14 @@ import queryString from "query-string";
 import { useQuery } from "@apollo/react-hooks";
 import { BOARD_QUERY } from "./Query";
 import { GrayWrapper } from "../../styles/Wrapper";
-import { getCeilNumber } from "../../service";
+import { getBoardName, getCeilNumber } from "../../service";
 
 let take = 2;
 
 const BoardPage = () => {
   const history = useHistory();
   const { category } = useParams();
-  // const roomName = history.location.state.roomName || "";
+  const roomName = getBoardName(category);
 
   let qs = queryString.parse(history.location.search);
   const [pageNumber, setPageNumber] = useState(qs.page ? qs.page : 1);
@@ -45,7 +45,7 @@ const BoardPage = () => {
     <GrayWrapper>
       {!loading && data && (
         <>
-          <Board posts={data.findManyPostsWithCategory} />
+          <Board posts={data.findManyPostsWithCategory} roomName={roomName} />
           <Pagination
             totalPage={
               data.findManyPostsWithCategory.length > 0

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useQuill } from "react-quilljs";
 import "quill/dist/quill.snow.css";
 import { s3url } from "../../config";
@@ -75,18 +75,24 @@ const PostingPage = () => {
     }
   };
 
-  const insertToEditor = (key) => {
-    const range = quill.getSelection();
-    quill.insertEmbed(range.index + 1, "image", `${s3url}/photos/${key}`);
-    quill.setSelection(range.index + 3);
-  };
+  const insertToEditor = useCallback(
+    (key) => {
+      const range = quill.getSelection();
+      quill.insertEmbed(range.index + 1, "image", `${s3url}/photos/${key}`);
+      quill.setSelection(range.index + 3);
+    },
+    [quill]
+  );
 
-  const saveToServer = async (file) => {
-    const imageKey = await imageUploadToServer(file);
-    insertToEditor(imageKey);
-  };
+  const saveToServer = useCallback(
+    async (file) => {
+      const imageKey = await imageUploadToServer(file);
+      insertToEditor(imageKey);
+    },
+    [insertToEditor]
+  );
 
-  const selectLocalImage = () => {
+  const selectLocalImage = useCallback(() => {
     const input = document.createElement("input");
     input.setAttribute("type", "file");
     input.setAttribute("accept", "image/*");
@@ -96,13 +102,13 @@ const PostingPage = () => {
       const file = input.files[0];
       saveToServer(file);
     };
-  };
+  }, [saveToServer]);
 
   useEffect(() => {
     if (quill) {
       quill.getModule("toolbar").addHandler("image", selectLocalImage);
     }
-  }, [quill]);
+  }, [quill, selectLocalImage]);
 
   return (
     <Wrapper onSubmit={onSubmit}>

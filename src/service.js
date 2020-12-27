@@ -22,3 +22,22 @@ export const getCeilNumber = (number) => {
     return Math.ceil(number);
   } else return 1;
 };
+
+export const getBoardName = (category) => {
+  switch (category) {
+    case "essay":
+      return "수필인의 방";
+
+    case "poem":
+      return "시인의 방";
+
+    case "dream":
+      return "꿈일기의 방";
+
+    case "review":
+      return "리뷰의 방";
+
+    default:
+      return "";
+  }
+};

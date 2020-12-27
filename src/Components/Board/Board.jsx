@@ -7,34 +7,37 @@ import { s3url } from "../../config";
 const Board = ({ roomName, posts }) => {
   return (
     <Wrapper>
-      {/* <h1>{roomName}</h1> */}
-      <BoardList>
-        {posts.map((post) => (
-          <Link to={`/post/${post.uuid}`} key={post.uuid}>
-            <ListItem>
-              <TextSection>
-                <Title>
-                  <strong>{post.title}</strong>
-                </Title>
+      <h1>{roomName}</h1>
+      {posts.length > 0 && (
+        <BoardList>
+          {posts.map((post) => (
+            <Link to={`/post/${post.uuid}`} key={post.uuid}>
+              <ListItem>
+                <TextSection>
+                  <Title>
+                    <strong>{post.title}</strong>
+                  </Title>
 
-                <ExtraInfo>
-                  <span>좋아요 {post.likeCount}</span>
-                  <span>{moment(Number(post.createdAt)).fromNow()}</span>
-                  <span>by {post.author.nickname}</span>
-                </ExtraInfo>
-              </TextSection>
-              <div className="image">
-                {post.thumbnail && (
-                  <img
-                    src={`${s3url}/photos/${post.thumbnail}`}
-                    alt="thumbnail"
-                  />
-                )}
-              </div>
-            </ListItem>
-          </Link>
-        ))}
-      </BoardList>
+                  <ExtraInfo>
+                    <span>좋아요 {post.likeCount}</span>
+                    <span>{moment(Number(post.createdAt)).fromNow()}</span>
+                    <span>by {post.author.nickname}</span>
+                  </ExtraInfo>
+                </TextSection>
+                <div className="image">
+                  {post.thumbnail && (
+                    <img
+                      src={`${s3url}/photos/${post.thumbnail}`}
+                      alt="thumbnail"
+                    />
+                  )}
+                </div>
+              </ListItem>
+            </Link>
+          ))}
+        </BoardList>
+      )}
+      {posts.length === 0 && <NoPost>포스트가 없습니다</NoPost>}
     </Wrapper>
   );
 };
@@ -46,6 +49,20 @@ const Wrapper = styled.div`
     text-align: center;
     margin-bottom: 70px;
   }
+  @media (max-width: 568px) {
+    h1 {
+      font-size: 1.5rem;
+    }
+  }
+`;
+
+const NoPost = styled.div`
+  font-size: 20px;
+  display: flex;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const BoardList = styled.ul`
@@ -70,6 +87,7 @@ const ListItem = styled.li`
   .image {
     flex: 1;
     max-width: 120px;
+    height: 100%;
     img {
       height: 100%;
       width: 100%;
