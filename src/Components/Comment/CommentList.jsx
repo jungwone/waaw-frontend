@@ -2,24 +2,43 @@ import React from "react";
 import styled from "styled-components";
 import Comment from "./Comment";
 
-const CommentList = ({ commentData, getMoreComments, newComment }) => {
+const CommentList = ({
+  commentData,
+  getMoreComments,
+  hasMoreComment,
+  newComment,
+  myInfo,
+  deleteComment,
+}) => {
   return (
     <Wrapper>
       {commentData && (
         <>
           <ul>
             {commentData.map((comment) => (
-              <Comment key={comment.uuid} comment={comment} />
+              <Comment
+                key={comment.uuid}
+                comment={comment}
+                myInfo={myInfo}
+                deleteComment={deleteComment}
+              />
             ))}
             {newComment &&
               newComment.length > 0 &&
               newComment.map((comment) => (
-                <Comment key={comment.uuid} comment={comment} />
+                <Comment
+                  key={comment.uuid}
+                  comment={comment}
+                  myInfo={myInfo}
+                  deleteComment={deleteComment}
+                />
               ))}
           </ul>
-          <MoreButton>
-            <button onClick={getMoreComments}>댓글 더 불러오기</button>
-          </MoreButton>
+          {hasMoreComment && (
+            <MoreButton>
+              <button onClick={getMoreComments}>댓글 더 불러오기</button>
+            </MoreButton>
+          )}
         </>
       )}
     </Wrapper>

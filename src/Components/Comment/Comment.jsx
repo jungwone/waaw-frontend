@@ -4,7 +4,7 @@ import { s3url } from "../../config";
 import UserImage from "../UserImage/UserImage";
 import moment from "moment";
 
-const Comment = ({ comment }) => {
+const Comment = ({ comment, myInfo, deleteComment }) => {
   const { user } = comment;
   return (
     <Wrapper>
@@ -20,6 +20,14 @@ const Comment = ({ comment }) => {
           <span className="date">
             {moment(Number(comment.createdAt)).format("YYYY.MM.DD. H:mm")}
           </span>
+          {myInfo && myInfo.uuid === user.uuid && (
+            <button
+              className="delete-btn"
+              onClick={() => deleteComment(comment.uuid)}
+            >
+              삭제
+            </button>
+          )}
         </div>
         <pre className="info-2">{comment.content}</pre>
       </TextInfo>
@@ -31,6 +39,9 @@ const Wrapper = styled.li`
   display: flex;
   padding: 20px 10px;
   border-bottom: 1px solid lightgray;
+  @media (max-width: 568px) {
+    padding: 15px 5px;
+  }
 `;
 const TextInfo = styled.div`
   margin-left: 15px;
@@ -39,12 +50,22 @@ const TextInfo = styled.div`
     font-size: 12px;
 
     .username {
-      font-size: 12px;
       padding-right: 20px;
       color: gray;
     }
     .date {
       color: #888888;
+    }
+    .delete-btn {
+      cursor: pointer;
+      outline: none;
+      border: none;
+      font-size: 12px;
+      color: #888888;
+      background-color: #fff;
+      &:hover {
+        color: ${(props) => props.theme.mainGreen};
+      }
     }
   }
 

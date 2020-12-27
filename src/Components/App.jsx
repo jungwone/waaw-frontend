@@ -8,6 +8,7 @@ import GlobalStyles from "../styles/GlobalStyles";
 import Theme from "../styles/Theme";
 import Routes from "./Routes";
 import Header from "./Header/Header";
+import { UserContext } from "../context/UserContext";
 
 const APP_QUERY = gql`
   {
@@ -15,18 +16,22 @@ const APP_QUERY = gql`
   }
 `;
 
+const value = JSON.parse(localStorage.getItem("waawToken"));
+
 function App() {
   const {
     data: { isLoggedIn },
   } = useQuery(APP_QUERY);
-  console.log(isLoggedIn);
+
   return (
     <ThemeProvider theme={Theme}>
       <>
         <GlobalStyles />
         <Router>
-          {isLoggedIn && <Header isLoggedIn={isLoggedIn} />}
-          <Routes isLoggedIn={isLoggedIn} />
+          <UserContext.Provider value={value}>
+            {isLoggedIn && <Header isLoggedIn={isLoggedIn} />}
+            <Routes isLoggedIn={isLoggedIn} />
+          </UserContext.Provider>
         </Router>
         <ToastContainer position="top-left" closeOnClick autoClose={4000} />
       </>

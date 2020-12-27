@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import { useParams } from "react-router-dom";
 import Post from "../../components/Post/Post";
@@ -7,12 +7,14 @@ import {
   LIKE_POST,
   COMMENT_LIST_QUERY,
   CREATE_COMMENT,
+  DELETE_COMMENT,
 } from "./Queries";
 import { toast } from "react-toastify";
 import { WhiteWrapper } from "../../styles/Wrapper";
 import CommentList from "../../components/Comment/CommentList";
 import useInput from "../../hooks/useInput";
 import CommentWriteForm from "../../components/Comment/CommentWriteForm";
+import { UserContext } from "../../context/UserContext";
 
 let take = 10;
 
@@ -20,12 +22,13 @@ const PostPage = () => {
   const { uuid } = useParams();
   const commentContent = useInput("");
   const [newComment, setNewComment] = useState([]);
+  const [hasMoreComment, setHasMoreComment] = useState(true);
+  const myInfo = useContext(UserContext);
 
   const { data, loading } = useQuery(POST_DETAIL_QUERY, {
-    variables: {
-      uuid,
-    },
+    variables: { uuid },
   });
+
   const { data: commentData, loading: commentLoading, fetchMore } = useQuery(
     COMMENT_LIST_QUERY,
     {
@@ -46,6 +49,9 @@ const PostPage = () => {
         take,
       },
       updateQuery: (prev, { fetchMoreResult }) => {
+        if (fetchMoreResult.findManyComments.length < take) {
+          setHasMoreComment(false);
+        }
         fetchMoreResult.findManyComments = [
           ...prev.findManyComments,
           ...fetchMoreResult.findManyComments,
@@ -83,6 +89,48 @@ const PostPage = () => {
     },
   });
 
+  const [deleteCommentMutation] = useMutation(DELETE_COMMENT);
+
+  const deleteComment = (commentId) => {
+    deleteCommentMutation({
+      variables: { commentId },
+      update: (cache, { data: { deleteComment } }) => {
+        const { findManyComments } = cache.readQuery({
+          query: COMMENT_LIST_QUERY,
+          variables: {
+            postId: uuid,
+            skip: 0,
+            take,
+          },
+        });
+        console.log(deleteComment);
+        findManyComments.filter((comment) => {
+          return comment.uuid !== deleteComment.uuid;
+        });
+
+        setNewComment([
+          ...newComment.filter(
+            (comment) => comment.uuid !== deleteComment.uuid
+          ),
+        ]);
+
+        cache.writeQuery({
+          query: COMMENT_LIST_QUERY,
+          variables: {
+            postId: uuid,
+            skip: 0,
+            take,
+          },
+          data: {
+            findManyComments: findManyComments.filter(
+              (comment) => comment.uuid !== deleteComment.uuid
+            ),
+          },
+        });
+      },
+    });
+  };
+
   const onSubmitContent = async (e) => {
     e.preventDefault();
 
@@ -99,7 +147,7 @@ const PostPage = () => {
         commentContent.setValue("");
       }
     } catch (error) {
-      toast.error("댓글 요청에 실패했습니다.");
+      toast.error("댓글 작성에 실패했습니다.");
     }
   };
 
@@ -135,12 +183,19 @@ const PostPage = () => {
     <WhiteWrapper>
       {!loading && data && data.findOnePost && (
         <>
-          <Post post={data.findOnePost} toggleLike={toggleLike} />
+          <Post
+            post={data.findOnePost}
+            toggleLike={toggleLike}
+            myInfo={myInfo}
+          />
           {!commentLoading && commentData && (
             <CommentList
               commentData={commentData.findManyComments}
               getMoreComments={getMoreComments}
+              hasMoreComment={hasMoreComment}
               newComment={newComment}
+              deleteComment={deleteComment}
+              myInfo={myInfo}
             />
           )}
           <CommentWriteForm

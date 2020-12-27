@@ -42,6 +42,15 @@ export const CREATE_COMMENT = gql`
   }
 `;
 
+export const DELETE_COMMENT = gql`
+  mutation DeleteComment($commentId: String!) {
+    deleteComment(commentId: $commentId) {
+      id
+      uuid
+    }
+  }
+`;
+
 export const COMMENT_LIST_QUERY = gql`
   query FindManyComments($postId: String!, $skip: Int, $take: Int) {
     findManyComments(postId: $postId, skip: $skip, take: $take) {
