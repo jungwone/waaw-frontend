@@ -15,6 +15,7 @@ export const POST_DETAIL_QUERY = gql`
         uuid
         nickname
         avatar
+        intro
       }
     }
   }

@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { CloseIcon, HamburgerIcon } from "../Icons/Icons";
-import { myMenu } from "./Menus";
+import {
+  CloseIcon,
+  HamburgerIcon,
+  ProfileIcon,
+  WritingIcon,
+} from "../Icons/Icons";
 import Dropdown from "./Dropdown";
 import Button from "../Button/Button";
 
-const Header = ({ isLoggedIn, logout }) => {
+const Header = ({ isLoggedIn, logout, myInfo }) => {
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
@@ -20,14 +24,32 @@ const Header = ({ isLoggedIn, logout }) => {
           </Logo>
 
           <MyMenu>
-            {myMenu.map((menu) => (
-              <BarListItem key={menu.id}>
-                <Link to={`/${menu.id}`}>{menu.icon}</Link>
-              </BarListItem>
-            ))}
-            <BarListItem>
-              <Button text="로그아웃" bgColor="#119100" onClick={logout} />
-            </BarListItem>
+            {isLoggedIn ? (
+              <>
+                <BarListItem>
+                  <Link to="/posting">
+                    <WritingIcon />
+                  </Link>
+                </BarListItem>
+                <BarListItem>
+                  <Link to={`/profile/${myInfo.uuid}`}>
+                    <ProfileIcon />
+                  </Link>
+                </BarListItem>
+                <BarListItem>
+                  <Button text="로그아웃" bgColor="#119100" onClick={logout} />
+                </BarListItem>
+              </>
+            ) : (
+              <>
+                <BarListItem>
+                  <Button text="로그인" bgColor="#119100" />
+                </BarListItem>
+                <BarListItem>
+                  <Button text="회원가입" bgColor="#119100" />
+                </BarListItem>
+              </>
+            )}
           </MyMenu>
 
           <BarIcon onClick={handleClick}>
@@ -87,6 +109,10 @@ const BarListItem = styled.li`
   float: left;
   margin-left: 25px;
   font-size: 20px;
+
+  button {
+    font-weight: normal;
+  }
 
   &:hover {
     a {

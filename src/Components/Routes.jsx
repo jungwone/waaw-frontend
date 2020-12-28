@@ -6,6 +6,8 @@ import Home from "../routes/Home/Home";
 import PostingPage from "../routes/Posting/PostingPage";
 import PostPage from "../routes/Post/PostPage";
 import BoardPage from "../routes/Board/BoardPage";
+import ProfilePage from "../routes/Profile/ProfilePage";
+import ProfileUpdatePage from "../routes/Profile/ProfileUpdatePage";
 
 const Routes = ({ isLoggedIn }) => {
   return (
@@ -23,7 +25,12 @@ const Routes = ({ isLoggedIn }) => {
         <Route exact path="/post/:uuid">
           <PostPage />
         </Route>
-        <Route exact path="/profile"></Route>
+        <Route exact path="/profile/:uuid">
+          <ProfilePage />
+        </Route>
+        <Route exact path="/updateProfile/:uuid">
+          <ProfileUpdatePage />
+        </Route>
       </Switch>
     </RouteWrapper>
   );

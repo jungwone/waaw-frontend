@@ -33,7 +33,11 @@ function App() {
         <Router>
           <UserContext.Provider value={value}>
             {isLoggedIn && (
-              <Header isLoggedIn={isLoggedIn} logout={logoutMutation} />
+              <Header
+                myInfo={value}
+                isLoggedIn={isLoggedIn}
+                logout={logoutMutation}
+              />
             )}
             <Routes isLoggedIn={isLoggedIn} />
           </UserContext.Provider>

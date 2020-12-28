@@ -1,36 +1,39 @@
-import React, { useRef } from "react";
+import React, { useCallback, useRef } from "react";
 import styled from "styled-components";
 import { Cancel } from "../Icons/Icons";
+import { s3url } from "../../config";
 
-const ImageUploadInput = ({ fileUrl, onChange }) => {
+const ImageUploadInput = ({ fileUrl, onChange, setNewPhoto, avatar }) => {
   const inputRef = useRef();
-  const onClick = (e) => {
+
+  const onClick = useCallback((e) => {
     e.preventDefault();
     inputRef.current.click();
-  };
+  }, []);
+
+  const onCancel = useCallback(() => {
+    fileUrl.setValue("");
+    setNewPhoto();
+  }, [fileUrl, setNewPhoto]);
 
   return (
     <Wrapper>
       <div className="container">
         <div className={`wrapper ${fileUrl.value && "active"}`}>
-          {fileUrl.value !== "" && <Image src={fileUrl.value}></Image>}
+          <Image
+            src={
+              fileUrl.value === "" ? `${s3url}/photos/${avatar}` : fileUrl.value
+            }
+          ></Image>
 
-          <div className="content">
-            {fileUrl.value === "" && (
-              <div className="text">No file chosen, yet!</div>
-            )}
-          </div>
-          <div
-            className="cancel-btn"
-            onClick={() => {
-              fileUrl.setValue("");
-            }}
-          >
-            <Cancel />
-          </div>
+          {fileUrl.value !== "" && (
+            <div className="cancel-btn" onClick={onCancel}>
+              <Cancel />
+            </div>
+          )}
         </div>
         <button onClick={onClick} className="custom-btn">
-          이미지 업로드
+          사진 변경
         </button>
         <input
           ref={inputRef}
@@ -49,20 +52,18 @@ const Wrapper = styled.div`
   .container {
     position: relative;
     font-family: inherit;
-  }
-  .wrapper {
-    position: relative;
-    height: 37vw;
-    max-height: 300px;
-    width: 100%;
-    border-radius: 10px;
-    background: #fff;
-    border: 2px dashed #c2cdda;
     display: flex;
     align-items: center;
-    justify-content: center;
+  }
+  .wrapper {
+    display: flex;
+    align-items: center;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    background: #fff;
     overflow: hidden;
-    margin-bottom: 15px;
+
     &.active {
       border: none;
     }
@@ -74,14 +75,18 @@ const Wrapper = styled.div`
     color: #5b5b7b;
   }
   .cancel-btn {
+    cursor: pointer;
     position: absolute;
+    z-index: 2;
     font-size: 20px;
-    right: 15px;
-    top: 15px;
+    left: 60px;
+    top: 0;
     color: #9658fe;
-    cursor: pointer;
-    display: none;
-    cursor: pointer;
+    svg {
+      width: 15px;
+      height: 15px;
+      fill: #888888;
+    }
   }
   .wrapper.active:hover .cancel-btn {
     display: block;
@@ -93,28 +98,26 @@ const Wrapper = styled.div`
   }
 
   .custom-btn {
-    display: block;
-    width: 100%;
+    margin-left: 50px;
+    width: 100px;
     height: 35px;
     border: none;
     outline: none;
     border-radius: 10px;
     color: #fff;
-    font-size: 15px;
-    font-weight: bold;
+    font-size: 13px;
+
     font-family: inherit;
     letter-spacing: 1px;
     text-transform: uppercase;
     cursor: pointer;
     background: #459905;
-    margin-bottom: 20px;
   }
 `;
 const Image = styled.div`
-  position: absolute;
   height: 100%;
   width: 100%;
-  background-size: contain;
+  background-size: cover;
   background-image: url(${(props) => props.src});
   background-repeat: no-repeat;
   background-position: center;
