@@ -1,19 +1,22 @@
 import React from "react";
 import styled from "styled-components";
 import { s3url } from "../../config";
-import UserImage from "../UserImage/UserImage";
+
 import moment from "moment";
+import UserAvatar from "../UserAvatar/UserAvatar";
 
 const Comment = ({ comment, myInfo, deleteComment }) => {
   const { user } = comment;
   return (
     <Wrapper>
-      <UserImage
+      <UserAvatar
         size="small"
-        src={user.avatar ? `${s3url}/${user.avatar}` : `${s3url}/smiley.png`}
+        src={
+          user.avatar ? `${s3url}/photos/${user.avatar}` : `${s3url}/smiley.png`
+        }
       >
         이미지
-      </UserImage>
+      </UserAvatar>
       <TextInfo>
         <div className="info-1">
           <span className="username">{user.nickname}</span>

@@ -17,7 +17,6 @@ const Banner = ({ src }) => {
 
 const Wrapper = styled.div`
   width: 100%;
-
   height: 400px;
   position: relative;
   background-image: url(${(props) => props.src});

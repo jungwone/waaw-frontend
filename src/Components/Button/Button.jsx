@@ -15,7 +15,7 @@ const ButtonStyle = styled.button`
   border: 0;
   border-radius: 4px;
   color: white;
-  font-weight: 600;
+
   background-color: ${(props) => (props.bgColor ? props.bgColor : "#6cd47f")};
   text-align: center;
   padding: 7px 4px;

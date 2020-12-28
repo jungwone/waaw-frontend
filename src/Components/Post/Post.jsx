@@ -3,8 +3,8 @@ import styled from "styled-components";
 import moment from "moment";
 import "moment/locale/ko";
 import { s3url } from "../../config";
-import UserImage from "../UserImage/UserImage";
 import { CommentIcon, EmptyHeart, FullHeart } from "../Icons/Icons";
+import UserAvatar from "../UserAvatar/UserAvatar";
 
 const Post = ({ post, toggleLike }) => {
   return (
@@ -19,18 +19,23 @@ const Post = ({ post, toggleLike }) => {
           </DateText>
         </PostContentBox>
         <UserInfoBox>
-          <UserImage
+          <UserAvatar
             src={
               post.author.avatar
-                ? `${s3url}/user/${post.author.avatar}`
+                ? `${s3url}/photos/${post.author.avatar}`
                 : `${s3url}/smiley.png`
             }
+            size="large"
             alt="avatar"
           />
 
           <Detail>
-            <div>{post.author.nickname}</div>
-            <div>글 86개</div>
+            <div className="nickname">{post.author.nickname}</div>
+            <div className="intro">
+              {post.author.intro
+                ? post.author.intro
+                : "자기소개를 작성하지 않았습니다."}
+            </div>
           </Detail>
         </UserInfoBox>
         <Buttons>
@@ -95,7 +100,7 @@ const PostContentBox = styled.section`
 const Title = styled.div`
   overflow-wrap: break-word;
   font-size: 32px;
-  margin-bottom: 25px;
+  margin-bottom: 100px;
   text-align: center;
   @media (max-width: 568px) {
     font-size: 23px;
@@ -132,6 +137,13 @@ const UserInfoBox = styled.section`
 
 const Detail = styled.div`
   padding-left: 20px;
+  color: #333333;
+  div {
+    padding-bottom: 15px;
+  }
+  .intro {
+    font-size: 13px;
+  }
 `;
 
 export default Post;
