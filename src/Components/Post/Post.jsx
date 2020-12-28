@@ -7,7 +7,7 @@ import { CommentIcon, EmptyHeart, FullHeart } from "../Icons/Icons";
 import UserAvatar from "../UserAvatar/UserAvatar";
 import { useHistory } from "react-router-dom";
 
-const Post = ({ post, toggleLike, isMe }) => {
+const Post = ({ post, toggleLike, isMe, onDeletePost }) => {
   const history = useHistory();
 
   const onClickModify = () => {
@@ -27,7 +27,7 @@ const Post = ({ post, toggleLike, isMe }) => {
           {isMe && (
             <MyOption>
               <button onClick={onClickModify}>수정</button>
-              <button>삭제</button>
+              <button onClick={onDeletePost}>삭제</button>
             </MyOption>
           )}
         </PostContentBox>

@@ -20,10 +20,8 @@ import {
 import { UPDATE_POST } from "./Queries";
 
 const PostUpdatePage = ({ post }) => {
-  console.log(post);
   const placeholder = "글 쓰는 당신을 응원합니다 🥰";
   const { quill, quillRef } = useQuill({ placeholder });
-
   const title = useInput(post.title);
   const category = useInput(post.category);
   const [open, setOpen] = useState(post.open);
@@ -62,7 +60,6 @@ const PostUpdatePage = ({ post }) => {
     if (thumbnail && isThumbnailChanged) {
       thumbnailUrl = await imageUploadToServer(thumbnail);
     }
-    console.log(post.uuid);
 
     try {
       const {

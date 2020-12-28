@@ -8,6 +8,7 @@ import {
   COMMENT_LIST_QUERY,
   CREATE_COMMENT,
   DELETE_COMMENT,
+  DELETE_POST,
 } from "./Queries";
 import { toast } from "react-toastify";
 import { WhiteWrapper } from "../../styles/Wrapper";
@@ -39,6 +40,26 @@ const PostPage = () => {
       },
     }
   );
+
+  const [deletePostMutation] = useMutation(DELETE_POST, {
+    variables: {
+      postId: uuid,
+    },
+  });
+
+  const onDeletePost = async () => {
+    const check = window.confirm("정말 삭제하시겠습니까?");
+    if (!check) {
+      return;
+    }
+    try {
+      await deletePostMutation();
+      alert("포스트가 삭제되었습니다.");
+      window.location.href = "/";
+    } catch {
+      toast.error("요청에 실패했습니다.");
+    }
+  };
 
   const getMoreComments = () => {
     setNewComment([]);
@@ -91,44 +112,52 @@ const PostPage = () => {
 
   const [deleteCommentMutation] = useMutation(DELETE_COMMENT);
 
-  const deleteComment = (commentId) => {
-    deleteCommentMutation({
-      variables: { commentId },
-      update: (cache, { data: { deleteComment } }) => {
-        const { findManyComments } = cache.readQuery({
-          query: COMMENT_LIST_QUERY,
-          variables: {
-            postId: uuid,
-            skip: 0,
-            take,
-          },
-        });
-        console.log(deleteComment);
-        findManyComments.filter((comment) => {
-          return comment.uuid !== deleteComment.uuid;
-        });
+  const deleteComment = async (commentId) => {
+    const check = window.confirm("정말 삭제하시겠습니까?");
+    if (!check) {
+      return;
+    }
+    try {
+      await deleteCommentMutation({
+        variables: { commentId },
+        update: (cache, { data: { deleteComment } }) => {
+          const { findManyComments } = cache.readQuery({
+            query: COMMENT_LIST_QUERY,
+            variables: {
+              postId: uuid,
+              skip: 0,
+              take,
+            },
+          });
 
-        setNewComment([
-          ...newComment.filter(
-            (comment) => comment.uuid !== deleteComment.uuid
-          ),
-        ]);
+          findManyComments.filter((comment) => {
+            return comment.uuid !== deleteComment.uuid;
+          });
 
-        cache.writeQuery({
-          query: COMMENT_LIST_QUERY,
-          variables: {
-            postId: uuid,
-            skip: 0,
-            take,
-          },
-          data: {
-            findManyComments: findManyComments.filter(
+          setNewComment([
+            ...newComment.filter(
               (comment) => comment.uuid !== deleteComment.uuid
             ),
-          },
-        });
-      },
-    });
+          ]);
+
+          cache.writeQuery({
+            query: COMMENT_LIST_QUERY,
+            variables: {
+              postId: uuid,
+              skip: 0,
+              take,
+            },
+            data: {
+              findManyComments: findManyComments.filter(
+                (comment) => comment.uuid !== deleteComment.uuid
+              ),
+            },
+          });
+        },
+      });
+    } catch {
+      toast.error("요청에 실패했습니다.");
+    }
   };
 
   const onSubmitContent = async (e) => {
@@ -175,7 +204,6 @@ const PostPage = () => {
   const toggleLike = () => {
     likePostMutation().catch((e) => {
       toast.error("오류가 발생했습니다. 다시 시도해주세요");
-      // console.log(e.message);
     });
   };
 
@@ -185,6 +213,7 @@ const PostPage = () => {
         <>
           <Post
             post={data.findOnePost}
+            onDeletePost={onDeletePost}
             toggleLike={toggleLike}
             myInfo={myInfo}
             isMe={myInfo.uuid === data.findOnePost.author.uuid}
