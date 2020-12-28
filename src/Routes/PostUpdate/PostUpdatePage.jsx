@@ -2,25 +2,34 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useQuill } from "react-quilljs";
 import "quill/dist/quill.snow.css";
 import { s3url } from "../../config";
-import styled from "styled-components";
-import Input from "../../components/Input/Input";
 import useInput from "../../hooks/useInput";
 import Button from "../../components/Button/Button";
-import { Select } from "../../components/SignUp/SignupForm";
 import { useMutation } from "@apollo/react-hooks";
-import { UPSERT_POST } from "./Queries";
 import { toast } from "react-toastify";
 import { imageUploadToServer } from "../../service";
 import { CloseIcon } from "../../components/Icons/Icons";
+import {
+  Wrapper,
+  CategorySelect,
+  Title,
+  Editor,
+  Thumbnail,
+  OpenCheckBox,
+  ButtonSection,
+} from "../Posting/PostingPage";
+import { UPDATE_POST } from "./Queries";
 
-const PostingPage = () => {
+const PostUpdatePage = ({ post }) => {
+  console.log(post);
   const placeholder = "글 쓰는 당신을 응원합니다 🥰";
   const { quill, quillRef } = useQuill({ placeholder });
-  const title = useInput("");
-  const category = useInput("");
-  const [open, setOpen] = useState(true);
-  const [thumbnail, setThumbnail] = useState();
-  const [upsertPostMutation] = useMutation(UPSERT_POST);
+
+  const title = useInput(post.title);
+  const category = useInput(post.category);
+  const [open, setOpen] = useState(post.open);
+  const [thumbnail, setThumbnail] = useState(new File([], `${post.thumbnail}`));
+  const [isThumbnailChanged, setIsThumbnailChanged] = useState(false);
+  const [updatePostMutation] = useMutation(UPDATE_POST);
 
   const onChangeOpen = () => {
     setOpen((prev) => !prev);
@@ -32,10 +41,12 @@ const PostingPage = () => {
     }
     const file = e.target.files[0];
     setThumbnail(file);
+    setIsThumbnailChanged(true);
   };
 
   const removeThumbnail = () => {
     setThumbnail();
+    setIsThumbnailChanged(true);
   };
 
   const onSubmit = async (e) => {
@@ -48,23 +59,25 @@ const PostingPage = () => {
       return;
     }
 
-    if (thumbnail) {
+    if (thumbnail && isThumbnailChanged) {
       thumbnailUrl = await imageUploadToServer(thumbnail);
     }
+    console.log(post.uuid);
 
     try {
       const {
-        data: { upsertPost },
-      } = await upsertPostMutation({
+        data: { updatePost },
+      } = await updatePostMutation({
         variables: {
+          postId: post.uuid,
           title: title.value,
           content,
           category: category.value,
           open,
-          thumbnail: thumbnailUrl,
+          thumbnail: isThumbnailChanged ? thumbnailUrl : thumbnail.name,
         },
       });
-      if (upsertPost) {
+      if (updatePost) {
         toast.success("포스트가 성공적으로 등록되었습니다.");
         setTimeout(() => {
           window.location.href = "/";
@@ -107,8 +120,9 @@ const PostingPage = () => {
   useEffect(() => {
     if (quill) {
       quill.getModule("toolbar").addHandler("image", selectLocalImage);
+      quill.root.innerHTML = post.content;
     }
-  }, [quill, selectLocalImage]);
+  }, [quill, selectLocalImage, post]);
 
   return (
     <Wrapper onSubmit={onSubmit}>
@@ -136,18 +150,16 @@ const PostingPage = () => {
         <div ref={quillRef} />
       </Editor>
       <Thumbnail>
-        {/* <div style={{ marginLeft: "auto" }}> */}
         <span>
           {thumbnail && thumbnail.name}
-          {thumbnail && (
+          {thumbnail.name !== "" && (
             <button onClick={removeThumbnail}>
               <CloseIcon />
             </button>
           )}
         </span>
-        <label htmlFor="thumbnail">썸네일 업로드</label>{" "}
+        <label htmlFor="thumbnail">썸네일 업로드</label>
         <input type="file" id="thumbnail" onChange={onChangeThumbnail} />
-        {/* </div> */}
       </Thumbnail>
       <OpenCheckBox>
         <div className="box">
@@ -161,180 +173,10 @@ const PostingPage = () => {
         </div>
       </OpenCheckBox>
       <ButtonSection>
-        <Button text="작성" height={"40"} bgColor={"#119100"} />
+        <Button text="수정" height={"40"} bgColor={"#119100"} />
       </ButtonSection>
     </Wrapper>
   );
 };
 
-export const Thumbnail = styled.div`
-  display: flex;
-  align-items: center;
-  padding-top: 50px;
-  margin-bottom: 25px;
-  span {
-    padding-right: 20px;
-  }
-  @media (max-width: 568px) {
-    flex-direction: column;
-    justify-content: flex-end;
-    span {
-      padding-bottom: 20px;
-    }
-  }
-
-  button {
-    cursor: pointer;
-    outline: none;
-    border: none;
-    background-color: #fff;
-  }
-  svg {
-    width: 10px;
-    height: 10px;
-    fill: #bdbdbd;
-  }
-
-  label {
-    display: inline-block;
-    margin-left: auto;
-    padding: 0.5em 0.75em;
-    color: #fff;
-    font-size: inherit;
-    line-height: normal;
-    vertical-align: middle;
-    background-color: #119100;
-    cursor: pointer;
-    border: 0;
-    border-bottom-color: #e2e2e2;
-    border-radius: 0.25em;
-  }
-
-  input[type="file"] {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
-  }
-`;
-
-export const Wrapper = styled.form`
-  padding: 100px 10px 100px 10px;
-  max-width: 800px;
-  margin: 0 auto;
-  font-family: "RIDIBatang";
-  letter-spacing: 1px;
-  h2 {
-    font-size: 30px;
-    text-align: center;
-    margin-bottom: 45px;
-  }
-`;
-
-export const Title = styled(Input)`
-  font-family: "RIDIBatang";
-  font-size: 20px;
-  height: 50px;
-  &:focus {
-    outline: none;
-  }
-  margin-bottom: 40px;
-  @media (max-width: 568px) {
-    height: 40px;
-    font-size: 16px;
-  }
-`;
-
-export const Editor = styled.div`
-  max-width: 800px;
-  height: 700px;
-  margin: 0 auto;
-  padding-bottom: 25px;
-  @media (max-width: 568px) {
-    height: 500px;
-  }
-
-  .ql-container {
-    font-family: "RIDIBatang";
-    letter-spacing: 0.6px;
-    font-size: 16px;
-  }
-`;
-
-export const ButtonSection = styled.div`
-  width: 200px;
-  margin: 0 auto;
-`;
-
-export const CategorySelect = styled(Select)`
-  display: flex;
-  margin-right: auto;
-  width: 200px;
-  height: 45px;
-  font-size: 16px;
-  margin-bottom: 30px;
-  @media (max-width: 568px) {
-    width: 180px;
-    height: 40px;
-    font-size: 14px;
-    margin-bottom: 20px;
-  }
-`;
-
-export const OpenCheckBox = styled.div`
-  display: flex;
-
-  .box {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
-    .text {
-      margin-left: 5px;
-      width: 45px;
-    }
-  }
-
-  input[type="checkbox"] {
-    appearance: none;
-    cursor: pointer;
-    &:focus {
-      outline: 0;
-    }
-  }
-  .toggle {
-    height: 25px;
-    width: 50px;
-    border-radius: 16px;
-    display: inline-block;
-    position: relative;
-    margin: 0;
-    border: 2px solid #474755;
-    background-color: white;
-    transition: all 0.2s ease;
-    &:after {
-      content: "";
-      position: absolute;
-      top: 1px;
-      left: 2px;
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background: green;
-      box-shadow: 0 1px 2px rgba(44, 44, 44, 0.2);
-      transition: all 0.2s cubic-bezier(0.5, 0.1, 0.75, 1.35);
-    }
-    &:checked {
-      &:after {
-        background: red;
-        transform: translatex(20px);
-      }
-    }
-  }
-`;
-
-export default PostingPage;
+export default PostUpdatePage;

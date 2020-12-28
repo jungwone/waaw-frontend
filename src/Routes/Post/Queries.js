@@ -9,6 +9,8 @@ export const POST_DETAIL_QUERY = gql`
       thumbnail
       likeCount
       isLiked
+      category
+      open
       commentCount
       createdAt
       author {

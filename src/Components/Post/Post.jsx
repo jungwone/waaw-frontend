@@ -5,8 +5,15 @@ import "moment/locale/ko";
 import { s3url } from "../../config";
 import { CommentIcon, EmptyHeart, FullHeart } from "../Icons/Icons";
 import UserAvatar from "../UserAvatar/UserAvatar";
+import { useHistory } from "react-router-dom";
 
-const Post = ({ post, toggleLike }) => {
+const Post = ({ post, toggleLike, isMe }) => {
+  const history = useHistory();
+
+  const onClickModify = () => {
+    history.push(`/updatePost/${post.uuid}`);
+  };
+
   return (
     <>
       <Wrapper>
@@ -17,6 +24,12 @@ const Post = ({ post, toggleLike }) => {
           <DateText>
             {moment(Number(post.createdAt)).format("YYYY. MM. DD. H : mm")}
           </DateText>
+          {isMe && (
+            <MyOption>
+              <button onClick={onClickModify}>수정</button>
+              <button>삭제</button>
+            </MyOption>
+          )}
         </PostContentBox>
         <UserInfoBox>
           <UserAvatar
@@ -61,6 +74,25 @@ const Post = ({ post, toggleLike }) => {
 
 const Buttons = styled.div`
   transition: 0.4s ease;
+`;
+
+const MyOption = styled.div`
+  text-align: right;
+  padding-top: 20px;
+  button {
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background-color: #fff;
+    color: #888888;
+    font-size: 14px;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  button + button {
+    margin-left: 20px;
+  }
 `;
 
 const Button = styled.button`

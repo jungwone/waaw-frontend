@@ -187,6 +187,7 @@ const PostPage = () => {
             post={data.findOnePost}
             toggleLike={toggleLike}
             myInfo={myInfo}
+            isMe={myInfo.uuid === data.findOnePost.author.uuid}
           />
           {!commentLoading && commentData && (
             <CommentList

@@ -8,6 +8,7 @@ import PostPage from "../routes/Post/PostPage";
 import BoardPage from "../routes/Board/BoardPage";
 import ProfilePage from "../routes/Profile/ProfilePage";
 import ProfileUpdatePage from "../routes/Profile/ProfileUpdatePage";
+import PostUpdateContainer from "../routes/PostUpdate/PostUpdateContainer";
 
 const Routes = ({ isLoggedIn }) => {
   return (
@@ -24,6 +25,9 @@ const Routes = ({ isLoggedIn }) => {
         </Route>
         <Route exact path="/post/:uuid">
           <PostPage />
+        </Route>
+        <Route exact path="/updatePost/:uuid">
+          <PostUpdateContainer />
         </Route>
         <Route exact path="/profile/:uuid">
           <ProfilePage />
