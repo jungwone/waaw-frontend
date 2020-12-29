@@ -216,7 +216,7 @@ const PostPage = () => {
             onDeletePost={onDeletePost}
             toggleLike={toggleLike}
             myInfo={myInfo}
-            isMe={myInfo.uuid === data.findOnePost.author.uuid}
+            isMe={myInfo?.uuid === data.findOnePost.author.uuid}
           />
           {!commentLoading && commentData && (
             <CommentList
