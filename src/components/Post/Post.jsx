@@ -7,7 +7,7 @@ import { CommentIcon, EmptyHeart, FullHeart } from "../Icons/Icons";
 import UserAvatar from "../UserAvatar/UserAvatar";
 import { useHistory } from "react-router-dom";
 
-const Post = ({ post, toggleLike, isMe, onDeletePost }) => {
+const Post = ({ post, toggleLike, isMe, onDeletePost, isLiked = false }) => {
   const history = useHistory();
 
   const onClickModify = () => {
@@ -52,7 +52,7 @@ const Post = ({ post, toggleLike, isMe, onDeletePost }) => {
           </Detail>
         </UserInfoBox>
         <Buttons>
-          {post.isLiked === true ? (
+          {isLiked ? (
             <Button onClick={toggleLike} className="heart">
               <FullHeart />
             </Button>

@@ -19,6 +19,9 @@ export const POST_DETAIL_QUERY = gql`
         avatar
         intro
       }
+      likes {
+        userId
+      }
     }
   }
 `;

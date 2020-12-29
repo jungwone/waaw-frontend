@@ -194,9 +194,14 @@ const PostPage = () => {
 
       if (data.toggleLike) {
         findOnePost.likeCount = findOnePost.likeCount + 1;
+        findOnePost.likes = [...findOnePost.likes, { userId: myInfo.uuid }];
       } else {
         findOnePost.likeCount = findOnePost.likeCount - 1;
+        findOnePost.likes = [
+          ...findOnePost.likes.filter((user) => user.userId !== myInfo.uuid),
+        ];
       }
+
       findOnePost.isLiked = data.toggleLike;
     },
   });
@@ -217,6 +222,13 @@ const PostPage = () => {
             toggleLike={toggleLike}
             myInfo={myInfo}
             isMe={myInfo?.uuid === data.findOnePost.author.uuid}
+            isLiked={
+              myInfo
+                ? data.findOnePost.likes.find(
+                    (user) => user.userId === myInfo.uuid
+                  )
+                : false
+            }
           />
           {!commentLoading && commentData && (
             <CommentList
