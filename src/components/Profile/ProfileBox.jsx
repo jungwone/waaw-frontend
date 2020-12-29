@@ -26,7 +26,7 @@ const ProfileBox = ({ user, isMe, onClickProfileUpdate }) => {
               <Button text="프로필 편집" onClick={onClickProfileUpdate} />
             )}
           </Row>
-          <Row>게시물 개수 00개</Row>
+          <Row>게시물 개수 {user.postCount}개</Row>
           <Row className="intro">
             {user.intro ? user.intro : "자기소개를 작성하지 않았습니다."}
           </Row>

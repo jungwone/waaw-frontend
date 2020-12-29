@@ -8,6 +8,7 @@ export const USER_QUERY = gql`
       nickname
       avatar
       intro
+      postCount
     }
   }
 `;
