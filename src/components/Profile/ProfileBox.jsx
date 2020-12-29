@@ -8,26 +8,30 @@ import UserAvatar from "../UserAvatar/UserAvatar";
 const ProfileBox = ({ user, isMe, onClickProfileUpdate }) => {
   return (
     <Wrapper>
-      <ImageSection>
-        <UserAvatar
-          src={
-            user.avatar
-              ? `${s3url}/photos/${user.avatar}`
-              : `${s3url}/smiley.png`
-          }
-          size="large"
-        />
-      </ImageSection>
-      <Section className="info">
-        <Row className="nickname">
-          {user.nickname.substring(0, 15)}
-          {isMe && <Button text="프로필 편집" onClick={onClickProfileUpdate} />}
-        </Row>
-        <Row>게시물 개수 00개</Row>
-        <Row className="intro">
-          {user.intro ? user.intro : "자기소개를 작성하지 않았습니다."}
-        </Row>
-      </Section>
+      <Inner>
+        <ImageSection>
+          <UserAvatar
+            src={
+              user.avatar
+                ? `${s3url}/photos/${user.avatar}`
+                : `${s3url}/smiley.png`
+            }
+            size="large"
+          />
+        </ImageSection>
+        <Section className="info">
+          <Row className="nickname">
+            {user.nickname.substring(0, 15)}
+            {isMe && (
+              <Button text="프로필 편집" onClick={onClickProfileUpdate} />
+            )}
+          </Row>
+          <Row>게시물 개수 00개</Row>
+          <Row className="intro">
+            {user.intro ? user.intro : "자기소개를 작성하지 않았습니다."}
+          </Row>
+        </Section>
+      </Inner>
     </Wrapper>
   );
 };
@@ -35,7 +39,11 @@ const ProfileBox = ({ user, isMe, onClickProfileUpdate }) => {
 const Wrapper = styled.div`
   max-width: 800px;
   margin: 0 auto;
-  border: 1px solid gray;
+  padding-top: 160px;
+`;
+
+const Inner = styled.div`
+  border: 1px solid lightgray;
   display: flex;
   padding: 10px;
 `;

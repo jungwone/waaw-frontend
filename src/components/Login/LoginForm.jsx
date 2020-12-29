@@ -45,9 +45,10 @@ export const Form = styled.form`
   text-align: center;
   max-width: 350px;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   margin: 0 auto;
   padding: 0 10px;
+
   display: flex;
   flex-direction: column;
   align-items: center;

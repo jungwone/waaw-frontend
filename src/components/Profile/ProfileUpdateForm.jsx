@@ -59,7 +59,7 @@ const Wrapper = styled.form`
   max-width: 500px;
 
   margin: 0 auto;
-  padding-top: 120px;
+
   padding-bottom: 30px;
 
   @media (max-width: 568px) {
@@ -81,6 +81,7 @@ const Title = styled.h1`
   text-align: center;
   font-size: 25px;
   margin-bottom: 50px;
+  padding-top: 120px;
   @media (max-width: 568px) {
     font-size: 20px;
   }

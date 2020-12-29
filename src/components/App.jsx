@@ -10,6 +10,7 @@ import Routes from "./Routes";
 import Header from "./Header/Header";
 import { UserContext } from "../context/UserContext";
 import { LOGOUT } from "../routes/Login/Queries";
+import Footer from "./Footer/Footer";
 
 const APP_QUERY = gql`
   {
@@ -37,8 +38,8 @@ function App() {
               isLoggedIn={isLoggedIn}
               logout={logoutMutation}
             />
-
             <Routes isLoggedIn={isLoggedIn} />
+            <Footer />
           </UserContext.Provider>
         </Router>
         <ToastContainer position="top-left" closeOnClick autoClose={4000} />

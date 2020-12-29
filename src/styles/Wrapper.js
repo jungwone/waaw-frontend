@@ -7,5 +7,6 @@ export const GrayWrapper = styled.div`
 
 export const WhiteWrapper = styled.div`
   background-color: #fff;
+  padding-top: 130px;
   min-height: 100vh;
 `;

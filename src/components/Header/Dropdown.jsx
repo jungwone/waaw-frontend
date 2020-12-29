@@ -44,6 +44,11 @@ const Dropdown = ({
             </Link>
           </>
         )}
+        <Link to="/notice">
+          <li onClick={closeMobileMenu}>
+            <span>공지사항</span>
+          </li>
+        </Link>
 
         {isLoggedIn ? (
           <li onClick={logout}>
@@ -70,13 +75,14 @@ const Wrapper = styled.div`
   width: 100vw;
   height: 100vh;
   top: 70px;
+  padding-top: 30px;
   background-color: #1c1f24;
   transition: all 0.3s ease;
 
   li {
     cursor: pointer;
     float: unset;
-    padding: 13px 0;
+    padding: 15px 0;
     display: flex;
     width: 100%;
     justify-content: center;

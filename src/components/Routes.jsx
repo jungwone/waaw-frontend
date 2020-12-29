@@ -10,6 +10,7 @@ import ProfileUpdatePage from "../routes/Profile/ProfileUpdatePage";
 import PostUpdateContainer from "../routes/PostUpdate/PostUpdateContainer";
 import SignUpPage from "../routes/SignUp/SignUpPage";
 import LoginPage from "../routes/Login/LoginPage";
+import NoticePage from "../routes/Notice/NoticePage";
 
 const Routes = ({ isLoggedIn }) => {
   return (
@@ -42,14 +43,16 @@ const Routes = ({ isLoggedIn }) => {
         <Route exact path="/updateProfile/:uuid">
           <ProfileUpdatePage />
         </Route>
+        <Route exact path="/notice">
+          <NoticePage />
+        </Route>
       </Switch>
     </RouteWrapper>
   );
 };
 
 const RouteWrapper = styled.div`
-  height: 100vh;
-  position: relative;
+  min-height: 100vh;
   top: ${(props) => props.theme.headerHeight};
 `;
 
