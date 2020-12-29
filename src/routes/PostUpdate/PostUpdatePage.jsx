@@ -75,10 +75,10 @@ const PostUpdatePage = ({ post }) => {
         },
       });
       if (updatePost) {
-        toast.success("포스트가 성공적으로 등록되었습니다.");
+        toast.success("포스트가 수정되었습니다.");
         setTimeout(() => {
           window.location.href = "/";
-        }, 2000);
+        }, 1000);
       }
     } catch (error) {
       toast.error(error.message);

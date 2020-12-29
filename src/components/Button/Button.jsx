@@ -15,7 +15,6 @@ const ButtonStyle = styled.button`
   border: 0;
   border-radius: 4px;
   color: white;
-
   background-color: ${(props) => (props.bgColor ? props.bgColor : "#6cd47f")};
   text-align: center;
   padding: 7px 4px;
@@ -23,6 +22,10 @@ const ButtonStyle = styled.button`
   font-family: inherit;
   font-size: 14px;
   cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
 
   @media (max-width: 568px) {
     font-size: 12px;

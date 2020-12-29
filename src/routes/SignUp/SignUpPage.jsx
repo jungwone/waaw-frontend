@@ -19,6 +19,7 @@ const SignUpPage = () => {
   };
 
   const onSubmit = async (e) => {
+    e.preventDefault();
     if (
       email.value === "" ||
       name.value === "" ||
@@ -42,10 +43,10 @@ const SignUpPage = () => {
       });
       if (createAccount) {
         toast.success("회원가입이 완료되었습니다!! 😘");
-        setTimeout(() => goLoginPage, 2000);
+        setTimeout(() => goLoginPage(), 2000);
       }
-    } catch {
-      toast.error("회원가입 요청에 실패했습니다.");
+    } catch (error) {
+      toast.error(error.message);
     }
   };
 

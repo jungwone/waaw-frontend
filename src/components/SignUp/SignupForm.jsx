@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
 
-const SignupForm = ({ email, name, nickname, bio, onSubmit, setAction }) => {
+const SignupForm = ({ email, name, nickname, bio, onSubmit, goLoginPage }) => {
   return (
     <Form onSubmit={onSubmit}>
       <Text>회원가입</Text>
@@ -29,11 +29,11 @@ const SignupForm = ({ email, name, nickname, bio, onSubmit, setAction }) => {
         <option value="" disabled hidden>
           성별
         </option>
-        <option value="m">Male</option>
-        <option value="f">Female</option>
+        <option value="m">남성</option>
+        <option value="f">여성</option>
       </Select>
       <Button text="가입하기" />
-      <ActionText onClick={() => setAction("login")}>
+      <ActionText onClick={goLoginPage}>
         <span>로그인하기</span>
       </ActionText>
     </Form>

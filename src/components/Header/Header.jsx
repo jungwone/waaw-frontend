@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import {
   CloseIcon,
   HamburgerIcon,
@@ -14,12 +14,23 @@ const Header = ({ isLoggedIn, logout, myInfo }) => {
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
+  const history = useHistory();
+
+  const goLoginPage = useCallback(() => {
+    history.push("/login");
+    setClick(false);
+  }, [history]);
+
+  const goSignUpPage = useCallback(() => {
+    history.push("/signup");
+    setClick(false);
+  }, [history]);
 
   return (
     <>
       <HeaderStyle>
         <InnerStyle>
-          <Logo>
+          <Logo onClick={closeMobileMenu}>
             <LogoText to="/">글의 집</LogoText>
           </Logo>
 
@@ -32,7 +43,7 @@ const Header = ({ isLoggedIn, logout, myInfo }) => {
                   </Link>
                 </BarListItem>
                 <BarListItem>
-                  <Link to={`/profile/${myInfo.uuid}`}>
+                  <Link to={`/profile/${myInfo ? myInfo.uuid : ""}`}>
                     <ProfileIcon />
                   </Link>
                 </BarListItem>
@@ -43,10 +54,18 @@ const Header = ({ isLoggedIn, logout, myInfo }) => {
             ) : (
               <>
                 <BarListItem>
-                  <Button text="로그인" bgColor="#119100" />
+                  <Button
+                    text="로그인"
+                    bgColor="#119100"
+                    onClick={goLoginPage}
+                  />
                 </BarListItem>
                 <BarListItem>
-                  <Button text="회원가입" bgColor="#119100" />
+                  <Button
+                    text="회원가입"
+                    bgColor="#119100"
+                    onClick={goSignUpPage}
+                  />
                 </BarListItem>
               </>
             )}
@@ -67,6 +86,10 @@ const Header = ({ isLoggedIn, logout, myInfo }) => {
         <Dropdown
           className={click ? `visible` : `hide`}
           closeMobileMenu={closeMobileMenu}
+          myInfo={myInfo}
+          isLoggedIn={isLoggedIn}
+          goLoginPage={goLoginPage}
+          goSignUpPage={goSignUpPage}
           logout={logout}
         />
       </HeaderStyle>

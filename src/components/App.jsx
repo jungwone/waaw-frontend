@@ -9,7 +9,7 @@ import Theme from "../styles/Theme";
 import Routes from "./Routes";
 import Header from "./Header/Header";
 import { UserContext } from "../context/UserContext";
-import { LOGOUT } from "../routes/Auth/Queries";
+import { LOGOUT } from "../routes/Login/Queries";
 
 const APP_QUERY = gql`
   {
@@ -32,13 +32,12 @@ function App() {
         <GlobalStyles />
         <Router>
           <UserContext.Provider value={value}>
-            {isLoggedIn && (
-              <Header
-                myInfo={value}
-                isLoggedIn={isLoggedIn}
-                logout={logoutMutation}
-              />
-            )}
+            <Header
+              myInfo={value}
+              isLoggedIn={isLoggedIn}
+              logout={logoutMutation}
+            />
+
             <Routes isLoggedIn={isLoggedIn} />
           </UserContext.Provider>
         </Router>

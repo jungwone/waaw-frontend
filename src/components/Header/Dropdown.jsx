@@ -1,33 +1,64 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { categories, myMenu } from "./Menus";
+import { categories } from "./Menus";
 import styled from "styled-components";
+import { ProfileIcon, WritingIcon } from "../Icons/Icons";
 
-const Dropdown = ({ closeMobileMenu, className, logout }) => {
+const Dropdown = ({
+  closeMobileMenu,
+  myInfo,
+  className,
+  logout,
+  isLoggedIn,
+  goLoginPage,
+  goSignUpPage,
+}) => {
   return (
     <Wrapper className={className}>
       <ul>
         {categories.map((category) => (
-          <Link key={category.id} to={`/room/${category.id}`}>
+          <Link key={category.id} to={`/board/${category.id}`}>
             <li onClick={closeMobileMenu}>
               <Icon className={`${category.id}`}>{category.icon}</Icon>
               <span className={category.id}>{category.name}</span>
             </li>
           </Link>
         ))}
-        {myMenu.map((menu) => (
-          <Link key={menu.id} to={`/${menu.id}`}>
-            <li onClick={closeMobileMenu}>
-              <Icon className={`${menu.id}`}>{menu.icon}</Icon>
-              <span>{menu.name}</span>
+        {isLoggedIn && (
+          <>
+            <Link to={"/posting"}>
+              <li onClick={closeMobileMenu}>
+                <Icon className="posting">
+                  <WritingIcon />
+                </Icon>
+                <span>글쓰기</span>
+              </li>
+            </Link>
+            <Link to={`/profile/${myInfo ? myInfo.uuid : ""}`}>
+              <li onClick={closeMobileMenu}>
+                <Icon className="profile">
+                  <ProfileIcon />
+                </Icon>
+                <span>내 정보</span>
+              </li>
+            </Link>
+          </>
+        )}
+
+        {isLoggedIn ? (
+          <li onClick={logout}>
+            <span className="logout">로그아웃</span>
+          </li>
+        ) : (
+          <>
+            <li onClick={goLoginPage}>
+              <span className="logout">로그인</span>
             </li>
-          </Link>
-        ))}
-        <li>
-          <span className="logout" onClick={logout}>
-            로그아웃
-          </span>
-        </li>
+            <li onClick={goSignUpPage}>
+              <span className="logout">회원가입</span>
+            </li>
+          </>
+        )}
       </ul>
     </Wrapper>
   );
@@ -45,11 +76,11 @@ const Wrapper = styled.div`
   li {
     cursor: pointer;
     float: unset;
-    padding: 15px 0;
+    padding: 13px 0;
     display: flex;
     width: 100%;
     justify-content: center;
-    font-size: 26px;
+    font-size: 20px;
     transition: all 0.3s linear;
 
     .logout {
@@ -93,8 +124,8 @@ const Icon = styled.figure`
   margin-right: 10px;
 
   svg {
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     /* fill: #f0df2b; */
 
     fill: #fff;
