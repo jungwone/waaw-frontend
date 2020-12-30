@@ -4,22 +4,27 @@ import { s3url } from "../../config";
 
 import moment from "moment";
 import UserAvatar from "../UserAvatar/UserAvatar";
+import { Link } from "react-router-dom";
 
 const Comment = ({ comment, myInfo, deleteComment }) => {
   const { user } = comment;
   return (
     <Wrapper>
-      <UserAvatar
-        size="small"
-        src={
-          user.avatar ? `${s3url}/photos/${user.avatar}` : `${s3url}/smiley.png`
-        }
-      >
-        이미지
-      </UserAvatar>
+      <Link to={`/profile/${user.uuid}`}>
+        <UserAvatar
+          size="small"
+          src={
+            user.avatar
+              ? `${s3url}/photos/${user.avatar}`
+              : `${s3url}/smiley.png`
+          }
+        ></UserAvatar>
+      </Link>
       <TextInfo>
         <div className="info-1">
-          <span className="username">{user.nickname}</span>
+          <span className="username">
+            <Link to={`/profile/${user.uuid}`}>{user.nickname}</Link>
+          </span>
           <span className="date">
             {moment(Number(comment.createdAt)).format("YYYY.MM.DD. H:mm")}
           </span>

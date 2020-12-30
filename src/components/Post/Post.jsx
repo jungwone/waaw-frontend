@@ -5,7 +5,7 @@ import "moment/locale/ko";
 import { s3url } from "../../config";
 import { CommentIcon, EmptyHeart, FullHeart } from "../Icons/Icons";
 import UserAvatar from "../UserAvatar/UserAvatar";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const Post = ({ post, toggleLike, isMe, onDeletePost, isLiked = false }) => {
   const history = useHistory();
@@ -32,18 +32,24 @@ const Post = ({ post, toggleLike, isMe, onDeletePost, isLiked = false }) => {
           )}
         </PostContentBox>
         <UserInfoBox>
-          <UserAvatar
-            src={
-              post.author.avatar
-                ? `${s3url}/photos/${post.author.avatar}`
-                : `${s3url}/smiley.png`
-            }
-            size="large"
-            alt="avatar"
-          />
+          <Link to={`/profile/${post.author.uuid}`}>
+            <UserAvatar
+              src={
+                post.author.avatar
+                  ? `${s3url}/photos/${post.author.avatar}`
+                  : `${s3url}/smiley.png`
+              }
+              size="large"
+              alt="avatar"
+            />
+          </Link>
 
           <Detail>
-            <div className="nickname">{post.author.nickname}</div>
+            <div className="nickname">
+              <Link to={`/profile/${post.author.uuid}`}>
+                {post.author.nickname}
+              </Link>
+            </div>
             <div className="intro">
               {post.author.intro
                 ? post.author.intro

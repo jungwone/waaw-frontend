@@ -62,7 +62,7 @@ const ProfileUpdatePage = () => {
       toast.success("프로필을 수정했습니다.");
       window.location.href = `/profile/${data.findUser.uuid}`;
     } catch (error) {
-      toast.error("요청에 실패했습니다.");
+      toast.error(error.message);
     }
   };
 
