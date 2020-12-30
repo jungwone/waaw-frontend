@@ -162,6 +162,10 @@ const PostPage = () => {
 
   const onSubmitContent = async (e) => {
     e.preventDefault();
+    if (!myInfo) {
+      alert("로그인 후 이용이 가능합니다.");
+      return;
+    }
 
     if (commentContent.value === "") {
       toast.warning("내용을 입력해주세요.");
@@ -207,6 +211,10 @@ const PostPage = () => {
   });
 
   const toggleLike = () => {
+    if (!myInfo) {
+      alert("로그인 후 이용이 가능합니다.");
+      return;
+    }
     likePostMutation().catch((e) => {
       toast.error("오류가 발생했습니다. 다시 시도해주세요");
     });

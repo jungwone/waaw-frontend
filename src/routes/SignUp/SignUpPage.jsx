@@ -30,6 +30,11 @@ const SignUpPage = () => {
       return;
     }
 
+    if (nickname.value.length > 12) {
+      toast.warning("닉네임은 최대 12자 이내로 입력해주세요.");
+      return;
+    }
+
     try {
       const {
         data: { createAccount },

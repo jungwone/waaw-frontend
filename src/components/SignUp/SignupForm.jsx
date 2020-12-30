@@ -22,7 +22,7 @@ const SignupForm = ({ email, name, nickname, bio, onSubmit, goLoginPage }) => {
       <Input
         value={nickname.value}
         onChange={nickname.onChange}
-        placeholder="닉네임(서비스 내에서 사용할 이름)"
+        placeholder="닉네임(최대 12자)"
         required
       />
       <Select value={bio.value} onChange={bio.onChange}>
