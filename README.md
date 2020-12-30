@@ -44,7 +44,7 @@
 
 - React (Styled Components)
 - Node
-- Prisma
+- Prisma (PostgreSQL)
 - Graphql + Apollo
   <br/>
 
@@ -56,7 +56,7 @@
 <br/><br/><br/>
 
 ## 화면
-
+각 사진은 클릭하시면 크게 볼 수 있습니다.
 
 <br/>
 
