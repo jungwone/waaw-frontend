@@ -1,70 +1,93 @@
-# Getting Started with Create React App
+# 글의 집 프로젝트
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<br/>
 
-## Available Scripts
+## 프로젝트를 만든 이유
 
-In the project directory, you can run:
+---
 
-### `yarn start`
+취업 준비를 하면서 무엇을 만들어볼까 고민했습니다.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+요즘 그 어느 때보다 많은 사람들이 넷플릭스, 왓챠, 유튜브 등을 이용하여 영상매체를 봅니다.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+영상도 좋지만, 책과 펜과 노트를 나름 사랑(?)하는 사람 중 한명으로써\
+사람들이 `글을 읽고 쓰는것`의 소중함과 재미를 잃지 않았으면 좋겠다는 생각을 했습니다.
 
-### `yarn test`
+무엇을 보고 읽느냐에 따라 다르겠지만
+"`input`만 있기보다 `output`도 함께 있는 것이 좋지 않을까.." 라고 생각합니다.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+그래서 이 프로젝트를 만들게 되었습니다.
+<br/><br/><br/>
 
-### `yarn build`
+### `사이트 주소`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+[https://www.geulhouse.com/](https://www.geulhouse.com/)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+프로젝트는 위의 주소를 클릭하시면 확인하실 수 있습니다.
+<br/><br/><br/>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 간략한 프로젝트 설명
 
-### `yarn eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+현재까지 구현한 기능은 아래와 같습니다.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 구현기능 목록
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- 회원가입
+- 로그인 (이메일 인증)
+- 글 작성, 수정, 삭제
+- 글 좋아요
+- 댓글 작성, 삭제
+- 프로필 수정
+  <br/>
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### 프로젝트 스택
 
-## Learn More
+- React (Styled Components)
+- Node
+- Prisma
+- Graphql + Apollo
+  <br/>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 기타 설명
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+이메일 인증은 `SendGrid` 라는 서비스를 이용했습니다.\
+프론트는 `Netlify` 백엔드는 `Heroku`에 각각 따로 배포했습니다.\
+이미지 저장소는 `AWS S3`에 저장하고 있습니다.
+<br/><br/><br/>
 
-### Code Splitting
+## 화면
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+<br/>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### `회원가입`
 
-### Making a Progressive Web App
+<img src="https://res.cloudinary.com/djc1ez16q/image/upload/v1609307981/waaw/signup_ftkgho.gif"  height="300px" alt="signup"/>
+<br/><br/><br/>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### `로그인`
 
-### Advanced Configuration
+<img src="https://res.cloudinary.com/djc1ez16q/image/upload/v1609307991/waaw/login_que73a.gif"  height="300px" alt="login"/>
+<br/><br/><br/>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### `글 작성`
 
-### Deployment
+<img src="https://res.cloudinary.com/djc1ez16q/image/upload/v1609308014/waaw/writing_bzam18.gif"  height="300px" alt="writing"/>
+<br/><br/><br/>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### `댓글 작성 & 삭제`
 
-### `yarn build` fails to minify
+<img src="https://res.cloudinary.com/djc1ez16q/image/upload/v1609308007/waaw/comment_qnvudr.gif"  height="300px" alt="comment"/>
+<br/><br/><br/>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### `글 좋아요`
+
+<img src="https://res.cloudinary.com/djc1ez16q/image/upload/v1609308003/waaw/like_kixpdm.gif"  height="300px" alt="like"/>
+<br/><br/><br/>
+
+### `모바일 화면`
+
+<img src="https://res.cloudinary.com/djc1ez16q/image/upload/v1609308753/waaw/mobile_raxpzx.gif"  height="300px" alt="like"/>
