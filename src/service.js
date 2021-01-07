@@ -7,7 +7,9 @@ export const imageUploadToServer = async (file) => {
 
   try {
     const result = await axios.post(
-      "http://localhost:4000/api/upload",
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:4000/api/upload"
+        : "https://geulhouse-backend.herokuapp.com/api/upload",
       formData,
       { headers: { "content-type": "multipart/form-data" } }
     );
