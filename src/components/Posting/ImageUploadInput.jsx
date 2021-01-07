@@ -20,11 +20,19 @@ const ImageUploadInput = ({ fileUrl, onChange, setNewPhoto, avatar }) => {
     <Wrapper>
       <div className="container">
         <div className={`wrapper ${fileUrl.value && "active"}`}>
-          <Image
-            src={
-              fileUrl.value === "" ? `${s3url}/photos/${avatar}` : fileUrl.value
-            }
-          ></Image>
+          {fileUrl.value === "" && avatar === "" ? (
+            <Image
+              src={fileUrl.value === "" ? `${s3url}/smiley.png` : fileUrl.value}
+            />
+          ) : (
+            <Image
+              src={
+                fileUrl.value === ""
+                  ? `${s3url}/photos/${avatar}`
+                  : fileUrl.value
+              }
+            />
+          )}
 
           {fileUrl.value !== "" && (
             <div className="cancel-btn" onClick={onCancel}>
